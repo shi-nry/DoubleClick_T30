@@ -1,11 +1,12 @@
 <template>
-    <div>
-    sandbox test page
-    
-    </div>
+
+<dir>
+This is a sandbox testing area.
+</dir>
 </template>
 
+    
 <script>
 
-</script>
 
+</script>

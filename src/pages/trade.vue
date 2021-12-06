@@ -1,5 +1,4 @@
 <script setup>
-
 </script>
 
 <template>
@@ -41,12 +40,7 @@
 #trade {
     text-align: center;
 }
-
 #cards {
     text-align: left;
 }
-
-
-
-
 </style> 
