@@ -13,20 +13,16 @@ const count = ref(0)
 <template>
 <div id="home">
 
-  <img alt="logo" src="../assets/Doubleclick.PNG" />
-    <Welcome msg="Trading Simplified" />
-  <h1>{{ msg }}</h1>
-
-  <p style="margin-left:600px; margin-right:600px">
-    Doubleclick is an online trading platform that serves trades
-    to users based on their preferences and trading styles. Upon
-    account creation, you will be asked to fill out a simple
-    questionnaire about your trading preferences and tolerances.
-    Click the Create Account button below to get started!
-  </p>
-
-  <button type="button" @click="count++">Create Account</button>
-
+  
+  <img src="../assets/main_screen/trading_simp.png" width="391" height="53" color="transparent" alt="Create Account">
+  <br>
+  <br>
+  <img src="../assets/main_screen/welcome_desc.png" width="573" height="150" color="transparent" alt="Create Account">
+  <br>
+  <br>
+  <button type="button" @click="$router.push('login')">
+    <img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="139" height="38" color="transparent" alt="Create Account">
+  </button>
 
 
   
@@ -37,6 +33,8 @@ const count = ref(0)
 #home {
   text-align: center;
 }
+
+
 
 a {
   color: #42b983;

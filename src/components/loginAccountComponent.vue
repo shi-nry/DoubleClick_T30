@@ -3,14 +3,9 @@
     <div>
 
         <form action="" method="POST">
-            <p1><b> enter your new account information</b></p1>
+            <p1><b> enter your account credentials</b></p1>
             <br><br>
-            <br><label for="first_name"><b>First Name</b></label>
-        <br><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" required /><br><br>    
-        
-        <label for="last_name"><b>Last Name</b>
-          <br></label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" required /><br>    
-          
+                
         <br><label for="email"><b>Email</b></label><br>
             <input id="email" maxlength="80" name="email" size="20" type="email" required ><br><br>
 
@@ -19,7 +14,7 @@
 
             
 
-            <br> <input type="submit" name="submit" value = "Create Account"> <br>
+            <br> <input type="submit" name="submit" value = "Login"> <br>
         </form>
 
     </div>
