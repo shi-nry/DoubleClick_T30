@@ -3,7 +3,7 @@
     <div>
 
         <form action="" method="POST">
-            <p1><b> enter your account credentials</b></p1>
+            <b><img src="../assets/login/login_welcome.png" width="315" height="92" color="transparent" alt="Create Account"></b>
             <br><br>
                 
         <br><label for="email"><b>Email</b></label><br>

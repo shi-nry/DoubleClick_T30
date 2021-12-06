@@ -9,11 +9,11 @@ export default {
 <template>
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <ul class="navbar-nav">
-    <img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>
     <li class="nav-item active">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/test">Test</router-link> |
-      <router-link to="/login">Login</router-link>
+      <img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>
+      <router-link to="/"><img src="../src/assets/top_navigation/home.png" style="padding-right: 40px;" align="right" alt="logo" width="52" height="16"/></router-link>
+      <router-link to="/test"><img src="../src/assets/top_navigation/test.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="35" height="15"/></router-link>
+      <router-link to="/login"><img src="../src/assets/top_navigation/login.png" style="padding-right: 15px;" align="right" width="42" height="20" alt="logo"/></router-link>
     </li>
   </ul>
 </nav>
