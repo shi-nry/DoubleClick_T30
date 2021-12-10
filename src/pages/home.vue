@@ -13,7 +13,7 @@ const count = ref(0)
 <template>
 <div id="home">
 
-  
+  <!-- Implemented visual assets and formatted (Colin) -->
   <img src="../assets/main_screen/trading_simp.png" width="391" height="53" color="transparent" alt="Create Account">
   <br>
   <br>
