@@ -1,4 +1,5 @@
 <template>
+<!-- This code will begin by printing out all available preferences. Then a text box and button will be created for submissions. -->
 <dir>
     <b>
     Here are the preferences from which you may choose from.
@@ -41,6 +42,7 @@
 
     
 <script>
+/* This code will allow the user send their inputs to the system. From There data will be sent to fire base */
 
 export default{
     name: "preference" ,
