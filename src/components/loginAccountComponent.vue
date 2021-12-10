@@ -1,6 +1,7 @@
 <template>
     
     <div>
+        <!-- Written by Loren Parvin -->
         <!-- this form is for account login -->
         <!-- it has validation for string length and all fields are required -->
         <!-- data currently does not get posted anywhere -->
