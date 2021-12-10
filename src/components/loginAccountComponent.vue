@@ -1,7 +1,11 @@
 <template>
     
     <div>
-
+        <!-- this form is for account login -->
+        <!-- it has validation for string length and all fields are required -->
+        <!-- data currently does not get posted anywhere -->
+        
+        
         <form action="" method="POST">
             <b><img src="../assets/login/login_welcome.png" width="315" height="92" color="transparent" alt="Create Account"></b>
             <br><br>
