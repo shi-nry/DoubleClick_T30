@@ -1,6 +1,10 @@
 <script setup>
 </script>
 
+<!-- This file hosts the trade page of the web application -->
+<!-- Currently, png files are placeholders for actual data and trade components -->
+<!-- This file was worked on by Henry Shi -->
+
 <template>
     <div id="trade">
         <span style="font-size: 50px; color: #099ba3;">Trade</span>
