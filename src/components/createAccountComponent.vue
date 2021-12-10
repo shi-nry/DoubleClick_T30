@@ -1,7 +1,11 @@
 <template>
     
     <div>
-
+        <!-- this form is for the create account page -->
+        <!-- it has validation for string length and all fields are required -->
+        <!-- data currently does not get posted anywhere -->
+        
+        
         <form action="" method="POST">
             <p1><b> enter your new account information</b></p1>
             <br><br>
