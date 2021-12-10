@@ -19,6 +19,9 @@
 import createAccountComponent from '/src/components/createAccountComponent.vue'
 import loginAccountComponent from '/src/components/loginAccountComponent.vue'
 
+/*page creation and logic by Loren Parvin*/
+/*this page uses the toggle method to dynamically display the 
+create account component and login component*/
 
 
 export default {
