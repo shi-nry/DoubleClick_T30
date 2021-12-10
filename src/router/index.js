@@ -7,6 +7,8 @@ import Preference from '/src/pages/preference.vue'
 import Settings from '/src/pages/settings.vue'
 import Trade from '/src/pages/trade.vue'
 
+/* in this file we define routes for our pages, and track history so the back button can be used */
+/* initial setup by Loren Parvin, contributions from Nick Rinehart and Henry Shi */
 
 const routes = [
 
