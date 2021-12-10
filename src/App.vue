@@ -3,7 +3,7 @@ export default {
   name: 'App',
 }
 
-<!-- all formatting, themeing, and design of layout of website in this section done by Colin -->
+/* all formatting, themeing, and implementation of layout of website in this section done by Colin */
 </script>
 
 <template>
