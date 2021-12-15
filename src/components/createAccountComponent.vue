@@ -33,23 +33,6 @@
 </template>
 
 <script>
-import{ref} from 'vue'
-import firebase from 'firebase'
 
-export default {
-  setup(){
-    const first_name = ref("")
-    const last_name = ref("")
-    const email = ref("")
-    const password = ref("")
-
-    const login = () => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email.value, password.value)
-        .then(data => console.log(data))
-        .catch(err => alert(err.message));
-    }
-  }
-};
+export default {};
 </script>

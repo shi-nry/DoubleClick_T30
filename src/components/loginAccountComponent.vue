@@ -27,6 +27,26 @@
 
 </template>
 
+
+
 <script>
-export default {};
+/** This bit is to take the user inputted data and attempt to login to firebase's account (assuming the account already exists) 
+ Worked on by Eugene Eom **/
+import{ref} from 'vue'
+import firebase from 'firebase'
+
+export default {
+    setup(){
+    const email = ref("")
+    const password = ref("")
+
+    const login = () => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email.value, password.value)
+        .then(data => console.log(data))
+        .catch(err => alert(err.message));
+    }
+  }
+};
 </script>
