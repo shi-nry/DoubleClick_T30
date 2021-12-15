@@ -1,7 +1,12 @@
 <template>
     
     <div>
-
+        <!-- Written by Loren Parvin -->
+        <!-- this form is for the create account page -->
+        <!-- it has validation for string length and all fields are required -->
+        <!-- data currently does not get posted anywhere -->
+        
+        
         <form action="" method="POST">
             <p1><b> enter your new account information</b></p1>
             <br><br>
@@ -28,5 +33,23 @@
 </template>
 
 <script>
-export default {};
+import{ref} from 'vue'
+import firebase from 'firebase'
+
+export default {
+  setup(){
+    const first_name = ref("")
+    const last_name = ref("")
+    const email = ref("")
+    const password = ref("")
+
+    const login = () => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email.value, password.value)
+        .then(data => console.log(data))
+        .catch(err => alert(err.message));
+    }
+  }
+};
 </script>
