@@ -13,7 +13,10 @@ npm install vue-router
 
 npm install firebase
 
+
+
 To run:
+
 npm run dev
 
 ![doubleclick_more_info](https://user-images.githubusercontent.com/64504261/142562384-7abb992f-ec5f-42ed-abd2-bcfc18be24c9.png)
