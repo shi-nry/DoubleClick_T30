@@ -30,23 +30,39 @@
 
 
 <script>
-/** This bit is to take the user inputted data and attempt to login to firebase's account (assuming the account already exists) 
- Worked on by Eugene Eom **/
-import{ref} from 'vue'
+//make the submit button at line 27 be a v-on click like
+//<button v-on:click="register">Register</button>
+/*
 import firebase from 'firebase'
-
 export default {
-    setup(){
-    const email = ref("")
-    const password = ref("")
-
-    const login = () => {
+  name: 'login',
+  data: function() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    login: function(e) {
       firebase
         .auth()
-        .signInWithEmailAndPassword(email.value, password.value)
-        .then(data => console.log(data))
-        .catch(err => alert(err.message));
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            alert(`You are logged in as ${user.email}`);
+            this.$router.go({ path: this.$router.path });
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      e.preventDefault();
     }
   }
+};
+*/
+
+export default {
+
 };
 </script>

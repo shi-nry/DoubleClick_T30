@@ -32,7 +32,43 @@
 
 </template>
 
+
 <script>
 
-export default {};
+//make the submit button at line 27 be a v-on click like
+//<button v-on:click="register">Register</button>
+/*
+import firebase from 'firebase';
+export default {
+  name: 'register',
+  data: function() {
+    return {
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    register: function(e) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            // console.log(user);
+            alert(`Account Created for ${user.email}`);
+            this.$router.go({ path: this.$router.path });
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      e.preventDefault();
+    }
+  }
+};*/
+export default {
+  
+};
 </script>
