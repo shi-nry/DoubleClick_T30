@@ -1,0 +1,100 @@
+/*Built by Colin Comstock*/
+html { 
+    background: url(background.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.blue_header{
+    font-family: lt_amberregular;
+    font-size: 40px;
+    color: rgb(36, 141, 206);
+
+}
+
+.blue_header_bg{
+    font-size: 45px;
+    color: rgb(36, 141, 206);
+    font-family: lt_amberregular;
+
+}
+
+.white_header{
+    font-size: 55px;
+    color: white;
+    font-family: lt_amberregular;
+}
+
+.white_subheader{
+    font-size: 40px;
+    color: white;
+    font-family: lt_amberregular;
+}
+
+.paragraph_blk {
+    font-size: 25px;
+    font-family: lt_amberregular;
+    padding-left: 25%;
+    padding-right: 25%;
+    color: rgb(0, 0, 0);
+}
+
+.paragraph {
+    font-size: 25px;
+    line-height: 35px;
+    font-family: lt_amberregular;
+    padding-left: 25%;
+    padding-right: 25%;
+    color: aliceblue;
+}
+
+
+.button{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.navbar{
+    font-size: 20px;
+    font-family: keep_calm_medregular;
+    color: rgb(54, 54, 54);
+    text-decoration: none;
+
+}
+
+/*
+@font-face {
+    font-family: 'Keep_Calm_Med';
+    src: url('../src/assets/cust/KeepCalm-Medium.woff2') format('woff2'),
+        url('../src/assets/cust/KeepCalm-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+*/
+
+@font-face {
+    font-family: 'keep_calm_medregular';
+    src: url('../assets/keepcalm/keepcalm-medium1-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'lt_amberregular';
+    src: url('../assets/ltamber/lt_amber_regular.woff2') format('woff2'),
+         url('../assets/ltamber/lt_amber_regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
