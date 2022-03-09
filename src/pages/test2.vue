@@ -1,3 +1,5 @@
+
+
 <template>
 
 <div>
@@ -17,6 +19,8 @@ Please input your risk tolerance to be suggested a stock
 <div v-if="tickerSuggestion">
 
     Your recommended trade is {{tickerSuggestion}}
+    <br>
+    {{description}}
     <br>
     The current value is {{currentPrice}} per share
 
@@ -41,12 +45,18 @@ export default{
             tickerSuggestion: '',
             stockTicker: '',
             currentPrice: '',
-            eodValue: '',
+            closePrice: '',
+            yearHigh: '',
+            yearLow: '',
+            peRatio: '',
+            volatility: '',
+            description: '',
+
 
             //arrays
             lowRisks : ['MMM', 'GOOG', 'AMZN', 'AXP', 'AAPL', 'DIS', 'IBM', 'NKE', 'WMT', 'SPY'], //low risk (etfs)
             mediumRisks : ['MMM', 'GOOG', 'AMZN', 'AXP', 'AAPL', 'DIS', 'IBM', 'NKE', 'WMT'], //medium risk (blue chip stocks)
-            highRisks : ['BABA', 'ROKU', 'META', 'NFLX', 'TLRY'], //high risk (low market cap or rough times recently)
+            highRisks : ['BABA', 'ROKU', 'FB', 'NFLX', 'TLRY'], //high risk (low market cap or rough times recently)
         }
 
     },
@@ -57,6 +67,7 @@ export default{
     },
     methods:
     {
+        //random number gen between min(inclusive) and max(inclusive)
         getRandomArbitrary(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
@@ -84,7 +95,7 @@ export default{
                 this.tickerSuggestion = this.lowRisks[randomTickerIndex]
                 this.stockTicker = this.tickerSuggestion
 
-                this.getCurrentPrice()
+                this.getQuoteData()
                 
 
             } else if(this.riskLevel == 'medium risk'){
@@ -98,7 +109,7 @@ export default{
                 this.tickerSuggestion = this.mediumRisks[randomTickerIndex]
                 this.stockTicker = this.tickerSuggestion
 
-                this.getCurrentPrice()
+                this.getQuoteData()
 
             } else if(this.riskLevel == 'high risk'){
                 console.log('high risk')
@@ -111,7 +122,7 @@ export default{
                 this.tickerSuggestion = this.highRisks[randomTickerIndex]
                 this.stockTicker = this.tickerSuggestion
 
-                this.getCurrentPrice()
+                this.getQuoteData()
 
 
             }
@@ -119,7 +130,7 @@ export default{
 
         },
 
-        async getCurrentPrice(){
+        async getQuoteData(){
             const apikey = "TILH8USQQOGPD8OQWLDV033FIOBDENMY"
             //need to build URL
             var url = "https://api.tdameritrade.com/v1/marketdata/"
@@ -145,6 +156,15 @@ export default{
 
             console.log(data[this.stockTicker.toUpperCase()])
             this.currentPrice = data[this.stockTicker.toUpperCase()].askPrice
+            this.closePrice = data[this.stockTicker.toUpperCase()].closePrice
+            this.yearLow = data[this.stockTicker.toUpperCase()]['52WkLow']
+            this.yearHigh = data[this.stockTicker.toUpperCase()]['52WkHigh']
+            this.peRatio = data[this.stockTicker.toUpperCase()].peRatio
+            this.volatility = data[this.stockTicker.toUpperCase()].volatility
+            this.description = data[this.stockTicker.toUpperCase()].description
+
+            console.log(this.volatility)
+
         },
     }
 }

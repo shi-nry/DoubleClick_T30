@@ -23,7 +23,7 @@
             </p>
             <br>
             <!--<br><img src="../assets/login/dont_have.png" width="486" height="43" color="transparent" alt="Create Account"><br><br>-->
-            <button class="button" v-on:click="flag = true; toggle();"><img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="136" height="38" color="transparent" alt="Create Account"></button>
+            <button class="button" v-on:click="flag = true; toggle();"><img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="138" height="38" color="transparent" alt="Create Account"></button>
         </div>
     
     </div>

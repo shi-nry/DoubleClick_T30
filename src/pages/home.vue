@@ -14,7 +14,11 @@ const count = ref(0)
 <style scoped>
     @import 'keepcalmfont.css';
 </style>
+
 <template>
+
+
+
 <div id="home">
   <p class="white_header">Trading Simplified</p>
   <p class="paragraph">Doubleclick is an online trading platform that serves trades 
@@ -33,7 +37,7 @@ const count = ref(0)
   <br>
   <p class="paragraph">Get started here:</p>
   <button class="button" @click="$router.push('login')">
-    <img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="139" height="38" color="transparent" alt="Create Account">
+    <img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="138" height="38" color="transparent" alt="Create Account">
   </button>
   <br>
   <br>
@@ -42,6 +46,8 @@ const count = ref(0)
 
   
 </div>
+
+
 </template>
 
 <style scoped>

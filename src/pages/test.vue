@@ -1,7 +1,11 @@
+<style scoped>
+    @import 'keepcalmfont.css';
+</style>
+
 <template>
 
 <div>
-This is a sandbox testing area.
+<p class="white_subheader"> This is a sandbox testing area.</p>
     <br><br>
     Enter your stock ticker
     <br><br>
@@ -9,7 +13,7 @@ This is a sandbox testing area.
 
     <input type="text" name="stockTicker1" v-model="stockTicker" />
     <br><br>
-    <button type="button" v-on:click="getCurrentPrice()" >Get Market Data</button>
+    <button type="button" class="button" v-on:click="getCurrentPrice()" ><img src="../assets/gradient_buttons/get_market_data.png" width="138" height="38" color="transparent" alt="Create Account"></button>
     <br><br>
     The current price of {{stockTicker.toUpperCase()}} is {{currentPrice}}
     <br><br>
@@ -19,7 +23,7 @@ This is a sandbox testing area.
     <br><br>-->
     Click to refresh bearer access token
     <br><br>
-    <button type="button" v-on:click="refreshBearerToken()" >Get new token</button>
+    <button type="button" class="button" v-on:click="refreshBearerToken()" ><img src="../assets/gradient_buttons/get_new_token.png" width="138" height="38" color="transparent" alt="Create Account"></button>
     <br><br><br><br><br><br>
     
 
@@ -32,7 +36,7 @@ This is a sandbox testing area.
     </select>
     <br><br>
 
-    <button type="button" v-on:click="getTDAccountInfo()" >Get Account Info</button>
+    <button type="button" class="button" v-on:click="getTDAccountInfo()" ><img src="../assets/gradient_buttons/get_account_info.png" width="138" height="38" color="transparent" alt="Create Account"></button>
     <br><br>
     Your AccountID is {{accountID}}
     <br><br>

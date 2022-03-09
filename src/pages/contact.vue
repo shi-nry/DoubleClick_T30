@@ -27,7 +27,7 @@
      <br><label for="name"><b>Message</b></label><br>
      <input type="text" name="message" placeholder="Write your message here!" required>
      <br><br>
-     <button class="button" type="submit"><img src="../assets/gradient_buttons/Submit.png" width="136" height="38" color="transparent" alt="Create Account"></button>
+     <button class="button" type="submit"><img src="../assets/gradient_buttons/Submit.png" width="138" height="38" color="transparent" alt="Create Account"></button>
      <br><br>
      <input type="hidden" name="_next" value="http://localhost:3000/thanks">
 </form>

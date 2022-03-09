@@ -1,7 +1,7 @@
 
 
 <template>
-    
+   
     <div>
         <!-- Written by Loren Parvin -->
         <!-- this form is for the create account page -->
@@ -10,8 +10,7 @@
         
         
         <form action="" method="POST">
-            <p class="paragraph_blk"> enter your new account information</p>
-            <br><br>
+            
             <br><label for="first_name"><b>First Name</b></label>
           <br><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" required /><br><br>    
         
@@ -25,7 +24,7 @@
           <br></label><input  id="password" maxlength="80" name="password" size="20" type="text" required /><br>
 
             
-
+        <br><br>
           <br> <input type="image" img src="../src/assets/gradient_buttons/create_act_btn_fixed.png" width="136" height="38" color="transparent" alt="Create Account"/> <br>
         </form>
 
