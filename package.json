@@ -7,12 +7,18 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axiom": "^0.1.6",
+    "axios": "^0.26.0",
+    "firebase": "^9.6.8",
+    "save": "^2.4.0",
+    "sweetalert": "^2.1.2",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.13",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-router": "^5.0.1",
     "vite": "^2.6.4"
   }
 }
