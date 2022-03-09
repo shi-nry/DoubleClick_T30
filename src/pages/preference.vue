@@ -1,4 +1,5 @@
 <template>
+<!-- This code will begin by printing out all available preferences. Then a text box and button will be created for submissions. (nicholas rinehart) -->
 <dir>
     <b>
     Here are the preferences from which you may choose from.
@@ -41,19 +42,20 @@
 
     
 <script>
+/* This code will allow the user send their inputs to the system. From there data will be sent to fire base (nicholas rinehart)*/
 
 export default{
     name: "preference" ,
     data() {
         return {
-            Preference: null,
+            Preferences: null,
             sugggestion: null
             }
 
     },
     methods: { 
         getData() {
-            console.log("values : ", this.Preference,this.suggestion);
+            console.log("values : ", this.Preferences,this.suggestion);
         }
     }
 

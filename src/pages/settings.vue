@@ -1,5 +1,5 @@
 <template>
-
+<!-- This code shows future common issues in the program. If the user cannot find what they are looking for they can insert their problem in a text box, and submit it. (nicholas rinehart) -->
 <dir>
 <b>
 <h1 style="font-size:3vw">Settings</h1>
@@ -33,6 +33,7 @@ Other, please share:
 
     
 <script>
+/* This code will allow the program to save the users issue to the system. (nicholas rinehart) */
 export default{
     name: "test" ,
     data() {

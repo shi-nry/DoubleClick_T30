@@ -1,56 +1,74 @@
-<template>
-    <div>
-        
-        
+ <!--Nicholas Rinehart 
+ this code needs to be integrated into our other program this one is just a proof of concept. It is simple and should not be in the final.
+ this code will create an account in the database and access it. -->
 
-        <keep-alive>
-            <component v-bind:is="component" />
-        </keep-alive>
+ 
+ <template>
+	<main class="login">
+		<section class="forms">
 
-        <div v-if="flag===false">
-            <br><img src="../assets/login/dont_have.png" width="486" height="43" color="transparent" alt="Create Account"><br><br>
-            <button v-on:click="flag = true; toggle();"><img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="136" height="38" color="transparent" alt="Create Account"></button>
-        </div>
-    
-    </div>
+			<form class="register" @submit.prevent="register">
+				<h2>Register</h2>
+				<input 
+					type="email" 
+					placeholder="Email address"
+					v-model="register_form.email" />
+				<input 
+					type="password" 
+					placeholder="Password" 
+					v-model="register_form.password" />
+				<input 
+					type="submit" 
+					value="Register" />
+			</form>
+
+			<form class="login" @submit.prevent="login">
+				<h2>Login</h2>
+				<input 
+					type="email" 
+					placeholder="Email address"
+					v-model="login_form.email" />
+				<input 
+					type="password" 
+					placeholder="Password" 
+					v-model="login_form.password" />
+				<input 
+					type="submit" 
+					value="Login" />
+			</form>
+
+		</section>
+	</main>
 </template>
 
 <script>
-import createAccountComponent from '/src/components/createAccountComponent.vue'
-import loginAccountComponent from '/src/components/loginAccountComponent.vue'
-
-
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  components: {
-    createAccountComponent,
-    loginAccountComponent
-  },
-  props: {
-      flag: Boolean
-  },
-  data (){
-      return {
-          component: "loginAccountComponent"
-      }
-  },
-  methods: {
-      toggle(){
-          if(this.component === createAccountComponent){
-              this.component = loginAccountComponent;
-              flag=true;
-          } else {
-              this.component = createAccountComponent;
-              flag=true;
-          }
-      }
-  }
-}
+	setup () {
+		const login_form = ref({});
+		const register_form = ref({});
+		const store = useStore();
 
+		const login = () => {
+			store.dispatch('login', login_form.value);
+		}
+
+		const register = () => {
+			store.dispatch('register', register_form.value);
+		}
+
+		return {
+			login_form,
+			register_form,
+			login,
+			register
+		}
+	}
+}
 </script>
 
 <style>
-
-
 
 </style>
