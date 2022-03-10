@@ -6,30 +6,28 @@
 
 <div>
 <p class="white_subheader"> This is a sandbox testing area.</p>
-    <br><br>
-    Enter your stock ticker
-    <br><br>
+    <p class="paragraph"> Enter your stock ticker</p>
 
 
     <input type="text" name="stockTicker1" v-model="stockTicker" />
     <br><br>
     <button type="button" class="button" v-on:click="getCurrentPrice()" ><img src="../assets/gradient_buttons/get_market_data.png" width="138" height="38" color="transparent" alt="Create Account"></button>
     <br><br>
-    The current price of {{stockTicker.toUpperCase()}} is {{currentPrice}}
+    <p class="paragraph">The current price of {{stockTicker.toUpperCase()}} is {{currentPrice}}</p>
     <br><br>
-    <br><br><br><br>
+ 
 
     <!---<button type="button" v-on:click="loginwithTD()" >Login to TD</button>
     <br><br>-->
-    Click to refresh bearer access token
-    <br><br>
+    <p class="paragraph">Click to refresh bearer access token</p>
+    
     <button type="button" class="button" v-on:click="refreshBearerToken()" ><img src="../assets/gradient_buttons/get_new_token.png" width="138" height="38" color="transparent" alt="Create Account"></button>
-    <br><br><br><br><br><br>
+    <br><br><br>
     
 
-    TD Account Info
+    <p class="paragraph">TD Account Info</p>
     <br><br>
-    Select Query Type <br><br>
+    <p class="paragraph">Select Query Type</p>
     <select  id="infotype" name="infotype" title="Info Type" v-model="accountquerytype">						    
     <option value="positions">positions</option>
     <option value="orders">orders</option>
@@ -37,15 +35,15 @@
     <br><br>
 
     <button type="button" class="button" v-on:click="getTDAccountInfo()" ><img src="../assets/gradient_buttons/get_account_info.png" width="138" height="38" color="transparent" alt="Create Account"></button>
-    <br><br>
-    Your AccountID is {{accountID}}
-    <br><br>
-    Your Cash Balance is {{cashbalance}}
-    <br><br>
+    
+    <p class="paragraph">Your AccountID is {{accountID}}</p>
+    
+    <p class="paragraph">Your Cash Balance is {{cashbalance}}</p>
+    
 
 
 
-    Your Current Postitions are
+    <p class="paragraph">Your Current Postitions are</p>
 
 
     <!--

@@ -1,4 +1,6 @@
 <script>
+import { onBeforeMount } from 'vue'
+
 export default {
   name: 'App',
   data(){
@@ -30,6 +32,7 @@ import swal from 'sweetalert';
       <!--<router-link to="preferences"> preferences &nbsp</router-link>-->
       <!--<router-link to="/settings">settings &ensp;</router-link>-->
       <router-link to="/contact">contact &ensp;</router-link>
+      <router-link to="test2">stock suggestion &ensp;</router-link>
       <router-link to="test">test</router-link>
       </p>
       <!--
