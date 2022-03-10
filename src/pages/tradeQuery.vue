@@ -1,6 +1,77 @@
-<!-- This file hosts the trade page of the web application -->
-<!-- Chart, Stock Data, and Info still need to be linked to database and backend API -->
-<!-- This file was worked on by Henry Shi -->
+<script>
+
+export default {
+    name: 'trade',
+    props: {
+        msg: String
+    },
+    data() {
+        return {
+            foobar: null,
+            url: '',
+            loaded:'',
+            stock: '',
+            stockprice: '',
+            volume: '',
+        }
+    },
+
+    methods: {
+
+        updateInfo() {
+            this.$router.push('/tradeUpdate');
+        },
+        async placeTrade() {
+
+            var res = await fetch(url, {headers});
+
+            if (!res.ok){
+                swal('There was an error with your request! Please try again.')
+            }
+        },
+        stockPrice() {
+            this.url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' 
+            + this.stock + '?apikey=0405b999b382887c98252f96982e18d0'
+            axios.get(this.url)
+            .then( response => {
+                this.stockprice = response.data.price,
+                console.log(this.stockprice)
+            })
+            .catch( err => console.log(err))
+        },
+        formatNumber(number) {
+            number = (number/1000000).toFixed(2).replace('.',',')
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
+        updateStock() {
+            this.url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' 
+            + this.stock + '?apikey=0405b999b382887c98252f96982e18d0'
+            console.log(this.url)
+            axios.get(this.url)
+            .then( response => {
+                this.stockPrice()
+            })
+            .catch (err => console.log(err))
+        }
+        
+    }
+}
+
+//TradingView widget library, does not want to resolve dependencies. Gotta figure it out.
+/*import VueTradingView from 'vue-trading-view/src/vue-trading-view.vue';
+
+export default {
+    name: 'ChartWidget',
+    props: {
+        msg: String
+    },
+    components: {
+        VueTradingView,
+    }
+} */
+
+
+</script>
 
 <template>
 <main>
@@ -14,7 +85,7 @@
     <div id="trade-function">
         <h1>
             <span style="font-size: 50px; color: #099ba3;">Trade</span>
-            {{this.stock}}
+            <span style="font-size: 30px;"> SPY</span>
         </h1>
         <form @submit.prevent="updateInfo">
             <input type="submit" value="Submit" class="btn-primary m-2">
@@ -33,23 +104,8 @@
 
     </div>
 
-    <!--div id="trade">
-        <h1>
-            <span style="font-size: 50px; color: #099ba3;">Trade</span>
-                {{ info }}
-        </h1>
-    </div-->
-        
-    <!--div id="about-stock-container">
-        <img src="../assets/main_screen/aboutStockPlaceholder.png"
-        alt="About-Stock-Backdrop"
-        style="width:57%;"
-        >
-        <div class="centered">Will pull stock info to go here</div>
-    </div-->
-
     <div id="about-stock-container">
-        <img src="../assets/main_screen/About This Stock_.png"
+        <img src="../assets/main_screen/aboutStockPlaceholder.png"
         alt="About-Stock-Backdrop"
         style="width:57%;"
         >
@@ -57,7 +113,7 @@
     </div>
 
     <div id="performance-container">
-        <img src="../assets/main_screen/Today’s Stock Performance_.png"
+        <img src="../assets/main_screen/performance placeholder.png"
         alt="Performance-Backdrop"
         style="width:57%;"
         >
@@ -71,9 +127,9 @@
     </div>
 
     <div id="card-container">
-        <img src="../assets/main_screen/discard pile base.png"
+        <img src="../assets/main_screen/s_p stock purchase card.png"
         alt="Card-Box"
-        style="width:15%;"
+        style="width:16%;"
         >
     </div>
 
@@ -98,18 +154,11 @@
     </div>
 
     <div id="trade-info-container">
-        <img src="../assets/main_screen/tradeInfoBlank.png"
+        <img src="../assets/main_screen/tradeInfoSPY.png"
         alt="Trade-Info"
         style="width:40%;"
         >
     </div>
-
-    <!--div class="chart-widget">
-        <VueTradingView :options="{
-            symbol: 'NASDAQ:SPY',
-            theme: 'dark',
-            }" />
-    </div-->
 
 </div>
 
@@ -117,74 +166,7 @@
 </main>        
 </template>
 
-<script>
 
-/*new Vue({
-  el: '#trade',
-  data () {
-    return {
-      info: null
-    }
-}, */
-
-
-
-export default {
-    name: 'trade',
-    props: {
-        msg: String
-    },
-    data() {
-        return {
-            foobar: null,
-            url: '',
-            loaded:'',
-            stock: '',
-            stockprice: '',
-            volume: '',
-        }
-    },
-
-    //import axios from 'axios'
-
-    /*mounted() {
-        this.url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' 
-            + this.stock + '?apikey=0405b999b382887c98252f96982e18d0'
-        axios.get(this.url)
-            .then(response => (this.info = response))
-    }*/
-    methods: {
-
-        updateInfo() {
-            this.$router.push('/tradeQuery');
-        },
-        async placeTrade() {
-
-            var res = await fetch(url, {headers});
-
-            if (!res.ok){
-                swal('There was an error with your request! Please try again.')
-            }
-        },
-        
-        formatNumber(number) {
-            number = (number/1000000).toFixed(2).replace('.',',')
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-        },
-        updateStock() {
-            this.url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' 
-            + this.stock + '?apikey=0405b999b382887c98252f96982e18d0'
-            console.log(this.url)
-            axios.get(this.url)
-            .then( response => {
-                this.stockPrice()
-            })
-            .catch (err => console.log(err))
-        }
-    }
-}
-
-</script>
 
 <style scoped>
 #trade-function {
@@ -231,21 +213,21 @@ export default {
 /* Container holding New Trade Button */
 #new-trade-button {
     position: relative;
-    top: -747px;
+    top: -760px;
     left: 220px;
     margin: 0 auto;
 }
 /* Container holding Place Trade Button */
 #place-trade-button {
     position: relative;
-    top: -847px;
+    top: -860px;
     left: 443px;
     margin: 0 auto;
 }
 /* Container holding Trade Info Box */
 #trade-info-container {
     position: relative;
-    top: -837px;
+    top: -850px;
     left: 350px;
     margin: 0 auto;
 }
