@@ -1,6 +1,5 @@
 import { VueElement } from '@vue/runtime-dom'
 import { createRouter, createWebHistory } from 'vue-router'
-//import VueTradingView from 'vue-trading-view/src/vue-trading-view.vue'
 import Home from '/src/pages/home.vue'
 import Test from '/src/pages/test.vue'
 import Test2 from '/src/pages/test2.vue'
@@ -8,9 +7,12 @@ import Login from '/src/pages/login.vue'
 import Preference from '/src/pages/preference.vue'
 import Settings from '/src/pages/settings.vue'
 import Trade from '/src/pages/trade.vue'
-import TradeQuery from '/src/pages/tradeQuery.vue'
 import Contact from '/src/pages/contact.vue'
 import Thanks from '/src/pages/thanks.vue'
+import Chart from '/src/pages/chart.vue'
+import swal from 'sweetalert'
+//import firebase from 'firebase'
+//import { auth } from '../firebase'
 
 
 
@@ -63,13 +65,10 @@ const routes = [
     {
         path: '/trade',
         name: 'trade',
-        component: Trade
-    },
-
-    {
-        path: '/tradeQuery',
-        name: 'tradeQuery',
-        component: TradeQuery
+        component: Trade,
+        meta: {
+            authrequired: true
+        },
     },
 
     {
@@ -82,6 +81,12 @@ const routes = [
         path: '/thanks',
         name: 'thanks',
         component: Thanks
+    },
+
+    {
+        path: '/chart',
+        name: 'chart',
+        component: Chart
     }
 
 
@@ -95,5 +100,22 @@ const router = createRouter({
     routes,
 
 })
+
+/*
+router.beforeEach((to, from, next) => {
+    //console.log(firebase.auth().currentUser)
+    if (to.matched.some(record => record.meta.authRequired)) {
+        if (auth().currentUser) {
+            next();
+        } else {
+            swal('You must be logged in to see this page');
+            next({
+                path: '/',
+            });
+        }
+    } else {
+        next();
+    }
+});*/
 
 export default router

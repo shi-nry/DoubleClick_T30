@@ -8,7 +8,20 @@ defineProps({
 
 const count = ref(0)
 
+import { getAuth } from "firebase/auth";
 
+const auth = getAuth();
+const user = auth.currentUser;
+
+if (user) {
+  // User is signed in, see docs for a list of available properties
+  // https://firebase.google.com/docs/reference/js/firebase.User
+  // ...
+  console.log(auth.currentUser);
+} else {
+  // No user is signed in.
+  console.log(auth.currentUser);
+}
 </script>
 
 <style scoped>
@@ -18,9 +31,10 @@ const count = ref(0)
 <template>
 
 
-
+<html>
+<body>
 <div id="home">
-  <p class="white_header">Trading Simplified</p>
+  <p id="layer2" class="white_header">Trading Simplified</p>
   <p class="paragraph">Doubleclick is an online trading platform that serves trades 
     to users based on their preferences and trading styles. Upon 
     account creation, you will be asked to fill out a simple 
@@ -46,8 +60,8 @@ const count = ref(0)
 
   
 </div>
-
-
+</body>
+</html>
 </template>
 
 <style scoped>
@@ -55,7 +69,14 @@ const count = ref(0)
   text-align: center;
 }
 
+#template {
+  height: 100%;
+}
 
+#html {
+  height: 100%;
+
+}
 
 a {
   color: #42b983;

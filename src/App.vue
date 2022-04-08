@@ -1,49 +1,74 @@
 <script>
 import { onBeforeMount } from 'vue'
+import { loadScript } from "vue-plugin-load-script";
+import { getAuth } from "firebase/auth";
+//import navBar from '/src/components/navBar.vue'
+//import { auth } from '/src/firebase/index.js'
+loadScript("https://cdn.jsdelivr.net/npm/chart.js")
+
+//console.log(auth.currentUser)
 
 export default {
   name: 'App',
   data(){
     return {
-      //login state 
-      state: ''
+       
+
     }
-  }
+  },
+  methods:
+  {
+    
+  },
 }
-import swal from 'sweetalert';
+//import swal from 'sweetalert';
 
 /* all formatting, themeing, and implementation of layout of website in this section done by Colin */
 </script>
 
 
 
-<template>
+<template id="background_fix">
 
-<div>
+<div class="background_fix">
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <img src="../src/assets/top_navigation/logo.png" style="padding-left: 20px;" align="left" alt="logo" width="227" height="27"/>
   <ul class="navbar-nav">
+    <div>
+      <li class="nav-item active">
+        <!--<img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>-->
+        <p class="navbar" style="padding-right: 20px;" align="right">
+        <router-link to="/"> home &ensp;</router-link>
+        <router-link to="login"> login &ensp;</router-link>
+        <!--<router-link to="preferences"> preferences &nbsp</router-link>-->
+        <!--<router-link to="/settings">settings &ensp;</router-link>-->
+        <router-link to="/contact">contact &ensp;</router-link>
+        <router-link to="test2">stock suggestion &ensp;</router-link>
+        <router-link to="test">test</router-link>
+        </p>
+        <!--
+        <img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>
+        <router-link to="/settings"><p class="navbar" style="padding-right: 40px;" align="right">settings</p></router-link>
+        <router-link to="/"><p class="navbar" style="padding-right: 15px;" align="right" alt="logo">home</p></router-link>
+        <router-link to="/test"><img src="../src/assets/top_navigation/test.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="35" height="15"/></router-link>
+        <router-link to="/login"><img src="../src/assets/top_navigation/login.png" style="padding-right: 15px;" align="right" width="42" height="20" alt="logo"/></router-link>
+        <router-link to="/preference"><img src="../src/assets/top_navigation/account.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="70" height="15"/></router-link>
+        -->
+      </li>
+    </div>
     
-    <li class="nav-item active">
-      <!--<img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>-->
-      <p class="navbar" style="padding-right: 20px;" align="right">
-      <router-link to="/"> home &ensp;</router-link>
-      <router-link to="login"> login &ensp;</router-link>
-      <!--<router-link to="preferences"> preferences &nbsp</router-link>-->
-      <!--<router-link to="/settings">settings &ensp;</router-link>-->
-      <router-link to="/contact">contact &ensp;</router-link>
-      <router-link to="test2">stock suggestion &ensp;</router-link>
-      <router-link to="test">test</router-link>
-      </p>
-      <!--
-      <img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>
-      <router-link to="/settings"><p class="navbar" style="padding-right: 40px;" align="right">settings</p></router-link>
-      <router-link to="/"><p class="navbar" style="padding-right: 15px;" align="right" alt="logo">home</p></router-link>
-      <router-link to="/test"><img src="../src/assets/top_navigation/test.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="35" height="15"/></router-link>
-      <router-link to="/login"><img src="../src/assets/top_navigation/login.png" style="padding-right: 15px;" align="right" width="42" height="20" alt="logo"/></router-link>
-      <router-link to="/preference"><img src="../src/assets/top_navigation/account.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="70" height="15"/></router-link>
-      -->
-    </li>
+    <!--
+    <div v-if="firebaseUserInfo">
+      <li class="nav-item active">
+        <p class="navbar" style="padding-right: 20px;" align="right">
+        <router-link to="/"> home &ensp;</router-link>
+        <router-link to="/contact">contact &ensp;</router-link>
+        <router-link to="test2">stock suggestion &ensp;</router-link>
+        <router-link to="test">test</router-link>
+        </p>
+      </li>
+    </div>
+    -->
   </ul>
 </nav>
   <div id="nav">
@@ -72,6 +97,8 @@ a:hover {
     color: rgb(92, 161, 98);
 }
 
+
+
 #app {
   font-family: lt_amberregular, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -83,6 +110,7 @@ a:hover {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: contain;
+  min-height: 100%;
 
 }
 
@@ -98,6 +126,7 @@ a:hover {
 #home {
   background-color: transparent;
   outline: none;
+  
 }
 
 #font_test {

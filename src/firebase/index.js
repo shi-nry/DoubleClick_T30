@@ -6,16 +6,15 @@ import { getAuth } from "firebase/auth"
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDwSI7_3_90og5I2OiBIwA96r0iJvzKHH8",
-  authDomain: "doubleclick-fd018.firebaseapp.com",
-  projectId: "doubleclick-fd018",
-  storageBucket: "doubleclick-fd018.appspot.com",
-  messagingSenderId: "358944323123",
-  appId: "1:358944323123:web:4aca785994f351c78ad546",
-  measurementId: "G-YSB11SYR11"
-};
+    apiKey: "AIzaSyBt6bUKbnTxy0G3NlHvJp4goDrReG6qC5M",
+    authDomain: "doubleclick-461f4.firebaseapp.com",
+    projectId: "doubleclick-461f4",
+    storageBucket: "doubleclick-461f4.appspot.com",
+    messagingSenderId: "1027269140602",
+    appId: "1:1027269140602:web:98606ef4d11188ffff5bc3"
+  };
 
-
+//firebase.initializeApp(config);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 

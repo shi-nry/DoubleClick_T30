@@ -19,6 +19,7 @@ export default createStore({
 
     SET_USER (state, user) {
       state.user = user
+    
     },
 
     CLEAR_USER (state) {
@@ -41,14 +42,14 @@ export default createStore({
             swal("Wrong password")
             break
           default:
-            swal("Something went wrong")
+            swal("Something went wrong test1")
         }
 
         return
       }
 
       commit('SET_USER', auth.currentUser)
-
+      console.log(auth.currentUser)
       router.push('/')
     },
 
@@ -72,7 +73,7 @@ export default createStore({
             swal("Weak password")
             break
           default:
-            swal("Something went wrong")
+            swal("Something went wrong test2")
         }
 
         return

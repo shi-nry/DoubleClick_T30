@@ -24,6 +24,9 @@
 
     <p class="white_subheader">The current value is {{currentPrice}} per share</p>
 
+    <p class="white_subheader">The 52 week high for {{tickerSuggestion}} is {{yearHigh}}
+        and the 52 week low is {{yearLow}} </p>
+
     <p class="paragraph">{{description}}</p>
 
     <div v-if="companyCategory">

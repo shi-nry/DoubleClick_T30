@@ -1,5 +1,5 @@
 <!-- This file hosts the trade page of the web application -->
-<!-- Chart, Stock Data, and Info still need to be linked to database and backend API -->
+<!-- Still needs to display chart -->
 <!-- This file was worked on by Henry Shi -->
 
 <template>
@@ -14,24 +14,20 @@
     <div id="trade-function">
         <h1>
             <span style="font-size: 50px; color: #099ba3;">Trade</span>
-            {{this.stock}}
+            {{this.stockTicker.toUpperCase()}}
         </h1>
         <form @submit.prevent="updateInfo">
-            <input type="submit" value="Submit" class="btn-primary m-2">
-            <input type="text" v-model="stock" name="stock" placeholder="Enter Ticker">
+            <input type="submit" value="Submit">
+            <input type="text" v-model="stockTicker" name="stock" placeholder="Enter Ticker">
         </form>
-        <div class="container">
-            <!--{{this.stock}}-->
-            <div class="stock_name"> {{stockprice}}</div>
-        </div>
-
+       
         <div class="row" v-if="loaded">
 
         <div class="col-md-5 ml-5">
             <b-table sticky-header hover :items="items" :fields="fields"></b-table>
         </div>
 
-    </div>
+    </div> 
 
     <!--div id="trade">
         <h1>
@@ -40,19 +36,12 @@
         </h1>
     </div-->
         
-    <!--div id="about-stock-container">
-        <img src="../assets/main_screen/aboutStockPlaceholder.png"
-        alt="About-Stock-Backdrop"
-        style="width:57%;"
-        >
-        <div class="centered">Will pull stock info to go here</div>
-    </div-->
-
     <div id="about-stock-container">
         <img src="../assets/main_screen/About This Stock_.png"
         alt="About-Stock-Backdrop"
         style="width:57%;"
         >
+        <div class="centered"> {{companyDescription}}</div>
         <!--div class="centered">Will pull stock info to go here</div-->
     </div>
 
@@ -78,19 +67,17 @@
     </div>
 
     <div id="new-trade-button">
-        <aside class="button">
-            <img 
-            @mouseenter="imagePopup"
-            @moustleave="imagePopdown"
-            src="../assets/gradient_buttons/new_trade_button.png"
+        <button type="button" class="button" v-on:click="getCurrentPrice()">
+            <img src="../assets/gradient_buttons/new_trade_button.png"
             alt="NewTrade-button"
-            style="width:20%;"
+            style="width:70%;"
             >
-        </aside>
+        </button>
     </div>
 
     <div id="place-trade-button">
-        <button type="button" class="button" v-on:click.native="placeTrade()"><img src="../assets/gradient_buttons/place_trade_button.png"
+        <button type="button" class="button" v-on:click.native="placeTrade()">
+        <img src="../assets/gradient_buttons/place_trade_button.png"
         alt="NewTrade-button"
         style="width:70%;"
         ></button>
@@ -102,85 +89,110 @@
         alt="Trade-Info"
         style="width:40%;"
         >
+        <div class="centered"> ${{currentPrice}}</div>
+        <div class="centered"> {{dayVolume}}</div>
+        <div class="centered"> {{marketCap}}</div>
     </div>
 
-    <!--div class="chart-widget">
-        <VueTradingView :options="{
-            symbol: 'NASDAQ:SPY',
-            theme: 'dark',
-            }" />
-    </div-->
-
 </div>
+
 
 </div>
 </main>        
 </template>
 
 <script>
-
-/*new Vue({
-  el: '#trade',
-  data () {
-    return {
-      info: null
-    }
-}, */
-
-
-
 export default {
-    name: 'trade',
-    props: {
-        msg: String
+    name: "trade",
+    beforeCreate()
+    {
+        //Vue.LoadScript("https://cdn.jsdelivr.net/npm/chart.js")
     },
-    data() {
+    data()
+    {
         return {
-            foobar: null,
-            url: '',
-            loaded:'',
-            stock: '',
-            stockprice: '',
-            volume: '',
+            //single variables
+            stockTicker: '',
+            aboutStock: '',
+            currentPrice: '',
+            dayVolume: '',
+            loggedin: true,
+
+            //single polygon api vars
+            companyDescription: '',
+            companyCategory: '',
+            marketCap: '',       
         }
     },
 
-    //import axios from 'axios'
+    props:{
+        
+    },
+    /*
+    created: function(){
+        this.currentPositions.set('testkey','testvalue')
+    },
+    */
+    methods:{
+        //method to get stock price
+        async updateInfo(){
+            //For TD api
+            const apikey = "TILH8USQQOGPD8OQWLDV033FIOBDENMY"
+            var url = "https://api.tdameritrade.com/v1/marketdata/"    
+            console.log(this.stockTicker)
 
-    /*mounted() {
-        this.url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' 
-            + this.stock + '?apikey=0405b999b382887c98252f96982e18d0'
-        axios.get(this.url)
-            .then(response => (this.info = response))
-    }*/
-    methods: {
+            if(this.stockTicker.length > 4){
+                swal('Please enter a valid stock ticker!')
+                return
+            }
 
-        updateInfo() {
-            this.$router.push('/tradeQuery');
-        },
-        async placeTrade() {
-
+            url += (this.stockTicker + '/quotes?apikey=' + apikey)
+            console.log(url)
+            
+            const headers = {}
+                      
             var res = await fetch(url, {headers});
 
             if (!res.ok){
                 swal('There was an error with your request! Please try again.')
             }
+
+            var data = await res.json()
+
+            console.log(data[this.stockTicker.toUpperCase()])
+            this.currentPrice = data[this.stockTicker.toUpperCase()].askPrice
+            this.dayVolume = data[this.stockTicker.toUpperCase()].totalVolume
+            this.aboutStock = data[this.stockTicker.toUpperCase()].description
+
+            this.getStockInfo(this.stockTicker.toUpperCase())
+
         },
-        
-        formatNumber(number) {
-            number = (number/1000000).toFixed(2).replace('.',',')
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
+        //get stock description
+        async getStockInfo(){
+            const polygonapikey = 'VzIPmrfLaShqiEphpszVpBRVH_DtnwpD'
+
+            var url = 'https://api.polygon.io/v3/reference/tickers/'
+            url += (this.stockTicker.toUpperCase() + '?apiKey=' + polygonapikey)
+            
+            var headers = {}
+
+            var res = await fetch(url, {headers});
+
+            if (!res.ok){
+                swal('There was an error fetching company info! Please try again.')
+                return
+            }
+
+            var data = await res.json()
+
+            console.log(data)
+
+            this.companyDescription = data.results.description
+            this.companyCategory = data.results.sic_description
+            this.marketCap = data.results.market_cap
+
         },
-        updateStock() {
-            this.url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' 
-            + this.stock + '?apikey=0405b999b382887c98252f96982e18d0'
-            console.log(this.url)
-            axios.get(this.url)
-            .then( response => {
-                this.stockPrice()
-            })
-            .catch (err => console.log(err))
-        }
     }
 }
 
@@ -248,6 +260,7 @@ export default {
     top: -837px;
     left: 350px;
     margin: 0 auto;
+    color: teal
 }
 /* Button class */
 .button {
