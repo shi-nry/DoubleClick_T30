@@ -17,8 +17,8 @@
             {{this.stockTicker.toUpperCase()}}
         </h1>
         <form @submit.prevent="updateInfo">
-            <input type="submit" value="Submit">
             <input type="text" v-model="stockTicker" name="stock" placeholder="Enter Ticker">
+            <input type="submit" value="Submit">
         </form>
        
         <div class="row" v-if="loaded">
@@ -117,11 +117,14 @@ export default {
             currentPrice: '',
             dayVolume: '',
             loggedin: true,
+            userId: '',
+            shares: '',
 
             //single polygon api vars
             companyDescription: '',
             companyCategory: '',
-            marketCap: '',       
+            marketCap: '',
+            
         }
     },
 
@@ -134,6 +137,34 @@ export default {
     },
     */
     methods:{
+
+        async placeTrade(){
+            var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/Position.json'
+            var headers = {}
+
+            //hardcoding testUserId will need to be changed later
+            this.userId = 'testUserId'
+
+            var body = {
+                shares: this.shares,
+                ticker: this.stockTicker,
+                tradePrice: this.currentPrice,
+                userId: this.userId
+            }
+            body = JSON.stringify(body)
+            
+            var res = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: body
+            })
+
+            var data = await res.json()
+            console.log(data)
+
+        },
+
+
         //method to get stock price
         async updateInfo(){
             //For TD api

@@ -47,7 +47,7 @@
     <br><br><br>
 
 </div>
-
+<button type="button" class="button" v-on:click="retrieveFromDB()" > pull from db </button>
 </div>
     
 </template>
@@ -93,7 +93,35 @@ export default{
 
     },
     methods:
-    {
+    {   
+        async postToDB(){
+            var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/User.json'
+            var headers = {}
+            var body = {
+                
+            }
+            
+
+            var res = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: body
+            })
+
+            
+            //console.log(data)
+
+        },
+
+        async retrieveFromDB(){
+            var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/Ticker.json'
+            var headers = {}
+            var response = await fetch(url, {headers})
+            var data = await response.json()
+            console.log(data)
+        },
+
+
         //random number gen between min(inclusive) and max(inclusive)
         getRandomArbitrary(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
