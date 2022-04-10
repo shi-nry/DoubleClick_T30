@@ -89,9 +89,9 @@
         alt="Trade-Info"
         style="width:40%;"
         >
-        <div class="centered"> ${{currentPrice}}</div>
-        <div class="centered"> {{dayVolume}}</div>
-        <div class="centered"> {{marketCap}}</div>
+        <div class="price-text"> ${{currentPrice.toLocaleString('en', {useGrouping:true})}}</div>
+        <div class="volume-text"> {{dayVolume.toLocaleString('en', {useGrouping:true})}}</div>
+        <div class="marketcap-text"> {{marketCap.toLocaleString('en', {useGrouping:true})}}</div>
     </div>
 
 </div>
@@ -302,10 +302,42 @@ export default {
 }
 /* Centered text */
 .centered {
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    inline-size: 500px;
+    overflow-wrap: break-word;
+}
+
+.price-text {
+    font-size: 30px;
+    position: absolute;
+    top: 35%;
+    left: 56%;
+    transform: translate(-50%, -50%);
+    inline-size: 500px;
+    overflow-wrap: break-word;
+}
+
+.volume-text {
+    font-size: 30px;
+    position: absolute;
+    top: 53%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    inline-size: 500px;
+    overflow-wrap: break-word;
+}
+
+.marketcap-text {
+    font-size: 30px;
+    position: absolute;
+    top: 70%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    inline-size: 500px;
+    overflow-wrap: break-word;
 }
 
 </style>
