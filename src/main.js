@@ -3,6 +3,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import stockChart from './components/stockChart.vue'
+import VueTradingView from 'vue-trading-view'
 import LoadScript from "vue-plugin-load-script"
 
 import {initializeApp} from 'firebase/app'
