@@ -24,6 +24,8 @@
                 <div>
                     <br>
                     <input type="submit" value="suggestStock" v-on:click="suggestStock()">
+                    <br><br>
+                    <input type="number" v-model="shares" name="shares" placeholder="Enter Desired Shares" min="1">
                 </div>
                 <div>
                     <br>
@@ -176,6 +178,7 @@ export default {
             peRatio: '',
             volatility: '',
             description: '',
+            
 
             variable: '',
             dividendYield: '',
@@ -364,28 +367,60 @@ export default {
         },
 
         async placeTrade(){
-            var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/Position.json'
-            var headers = {}
+            var totalTradeCost = parseFloat(this.currentPrice * this.shares)
+            console.log(totalTradeCost)
+            console.log(this.cashMoney)
+            console.log(parseFloat(this.cashMoney))
+            console.log(parseFloat(totalTradeCost) > parseFloat(this.cashMoney))
+            if(parseFloat(totalTradeCost) < parseFloat(this.cashMoney)){
+                
+                //first post position to DB
+                var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/Position.json'
+                var headers = {}
 
-            var body = {
-                shares: this.shares,
-                ticker: this.stockTicker,
-                tradePrice: this.currentPrice,
-                userId: this.userId,
-                open: true,
+                var body = {
+                    shares: this.shares,
+                    ticker: this.stockTicker.toUpperCase(),
+                    tradePrice: this.currentPrice,
+                    userId: this.userId,
+                    open: true,
+                }
+                body = JSON.stringify(body)
+                
+                var res = await fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: body
+                })
+
+                var data = await res.json()
+                console.log(data)
+
+
+                //next update user balance
+                this.cashMoney -= parseFloat(totalTradeCost)
+
+                var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/User/' + this.userPostId + '.json'
+                var headers = {}
+
+                var body = {
+                    cashMoney: this.cashMoney,
+                }
+                body = JSON.stringify(body)
+                
+                var res = await fetch(url, {
+                    method: 'PATCH',
+                    headers: headers,
+                    body: body
+                })
+
+                var data = await res.json()
+                console.log(data)
+
+                swal('Trade Placed Successfully!')
+            } else {
+                swal('Sorry, You Don\'t Have Enough Funds to Place This Trade!')
             }
-            body = JSON.stringify(body)
-            
-            var res = await fetch(url, {
-                method: 'POST',
-                headers: headers,
-                body: body
-            })
-
-            var data = await res.json()
-            console.log(data)
-
-            swal('Trade Placed Successfully!')
 
         },
 
