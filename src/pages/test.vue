@@ -5,6 +5,54 @@
 <template>
 
 <div>
+
+<div  v-if="loggedin===true">
+
+  
+
+  <textarea placeholder="Comment..."></textarea>
+
+
+
+<div class="list-choice">
+  <div class="list-choice-title">Month</div>
+  <div class="list-choice-objects">
+    <label>
+      <input type="radio" name="month"/>                         <span>January</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>February</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>March</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>April</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>May</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>June</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>July</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>September</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>October</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>November</span>
+    </label>
+    <label>
+      <input type="radio" name="month"/>                         <span>December</span>
+    </label>
+  </div>
+</div>
+
 <p class="white_subheader"> Test Page</p>
     <p class="paragraph"> Enter your stock ticker</p>
 
@@ -43,19 +91,45 @@
 
     <p class="paragraph">Your Current Postitions are</p>
 
+</div>
+
+<div v-else-if="loggedin===false">
+    <div>
+    <h2> Please log in to view this page! </h2>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    </div>
+
 
 </div>
 </template>
 
 
 <script>
-
+import {getAuth} from "firebase/auth";
 export default {
     name: "test",
     beforeCreate()
     {
         //Vue.LoadScript("https://cdn.jsdelivr.net/npm/chart.js")
     },
+
+    created(){
+
+        const auth = getAuth();
+        try{
+            this.userid = auth.currentUser.uid;
+            this.loggedin = true;
+            console.log('logged in with ' + this.userid);
+        }catch(error){
+            this.userid = '';
+            this.loggedin = false;
+            console.log('not logged in');
+        }
+        
+
+    },
+
     data()
     {
         return {

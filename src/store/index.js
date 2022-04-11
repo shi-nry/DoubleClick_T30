@@ -76,15 +76,39 @@ export default createStore({
             swal("Something went wrong test2")
         }
 
+
+
         return
       }
 
       commit('SET_USER', auth.currentUser)
 
+      console.log(auth.currentUser.uid);
+
+      var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/User.json'
+      var headers = {}
+      var body = {
+        userId: auth.currentUser.uid,
+        cashMoney: 10000,
+        holdTime: null,
+        riskTolerance: null,
+        dividendImportance: null,
+      }
+      body = JSON.stringify(body)
+      //method PATCH maybe?
+      var res = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: body
+      })
+
+      var data = await res.json()
+      console.log(data)
       router.push('/')
-    },
+      },
 
     async logout ({ commit }) {
+      console.log(auth.currentUser);
       await signOut(auth)
 
       commit('CLEAR_USER')

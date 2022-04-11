@@ -5,7 +5,7 @@
 <template>
 
 <div>
-
+<div  v-if="loggedin===true">
 <p class="paragraph">Please input your risk tolerance to be suggested a stock</p> 
 <br>
 <select id="riskLevel" name="riskLevel" v-model="riskLevel" >
@@ -49,15 +49,24 @@
 </div>
 <button type="button" class="button" v-on:click="retrieveFromDB()" > pull from db </button>
 </div>
-    
+
+
+<div v-else-if="loggedin===false">
+    <div>
+    <h2> Please log in to view this page! </h2>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    </div>
+
+</div>
+
 </template>
 
 
 
 <script>
 import swal from 'sweetalert';
-
-
+import {getAuth} from "firebase/auth";
 export default{
     name: 'test2',
     data(){
@@ -87,6 +96,22 @@ export default{
         }
 
     },
+    created(){
+
+        const auth = getAuth();
+        try{
+            this.userid = auth.currentUser.uid;
+            this.loggedin = true;
+            console.log('logged in with ' + this.userid);
+        }catch(error){
+            this.userid = '';
+            this.loggedin = false;
+            console.log('not logged in');
+        }
+        
+
+    },
+    
     props:
     {
         

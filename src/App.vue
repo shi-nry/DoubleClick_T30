@@ -8,21 +8,53 @@ loadScript("https://cdn.jsdelivr.net/npm/chart.js")
 
 //console.log(auth.currentUser)
 
+//test
+  /*
+module.exports = {
+  data: function() {
+       return {
+          testno: 'signed in',
+          testyes: 'signed out'
+        }
+    }
+}
+*/
+  //test
+  //window.onload = function() {
+  //created();
+//};
 export default {
   name: 'App',
   data(){
     return {
-       
+       userId: '',
+       loggedin: '',
 
     }
   },
+  
   methods:
   {
-    
+   
   },
+  created(){
+
+        const auth = getAuth();
+        try{
+            this.userId = auth.currentUser.uid;
+            this.loggedin = true;
+            console.log('logged in with ' + this.userId);
+        }catch(error){
+            this.userId = '';
+            this.loggedin = false;
+            console.log('not logged in');
+        }
+        
+        
+
+    },
 }
 //import swal from 'sweetalert';
-
 /* all formatting, themeing, and implementation of layout of website in this section done by Colin */
 </script>
 
@@ -34,17 +66,19 @@ export default {
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <img src="../src/assets/top_navigation/logo.png" style="padding-left: 20px;" align="left" alt="logo" width="227" height="27"/>
   <ul class="navbar-nav">
-    <div>
+    <div >
       <li class="nav-item active">
         <!--<img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>-->
         <p class="navbar" style="padding-right: 20px;" align="right">
         <router-link to="/"> home &ensp;</router-link>
-        <router-link to="login"> login &ensp;</router-link>
-        <!--<router-link to="preferences"> preferences &nbsp</router-link>-->
+        <router-link to="/login"> {{loggedin}} &ensp;</router-link> <!-- make login a variable --> 
         <!--<router-link to="/settings">settings &ensp;</router-link>-->
         <router-link to="/contact">contact &ensp;</router-link>
-        <router-link to="test2">stock suggestion &ensp;</router-link>
-        <router-link to="test">test</router-link>
+        <router-link to="/preference"> preferences &ensp;</router-link>
+        <router-link to="/position"> positions &ensp;</router-link>
+        <router-link to="/trade"> trade &ensp;</router-link>
+        <router-link to="/test2">stock suggestion &ensp;</router-link>
+        <router-link to="/test">test</router-link>
         </p>
         <!--
         <img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>
@@ -57,18 +91,18 @@ export default {
       </li>
     </div>
     
-    <!--
-    <div v-if="firebaseUserInfo">
+   <!--
+    <div v-else-if="loggedin===false">
       <li class="nav-item active">
         <p class="navbar" style="padding-right: 20px;" align="right">
         <router-link to="/"> home &ensp;</router-link>
+        <router-link to="/login"> login &ensp;</router-link>
         <router-link to="/contact">contact &ensp;</router-link>
-        <router-link to="test2">stock suggestion &ensp;</router-link>
         <router-link to="test">test</router-link>
         </p>
       </li>
     </div>
-    -->
+ -->
   </ul>
 </nav>
   <div id="nav">
@@ -90,11 +124,15 @@ a:link {
     text-decoration: none;
     color: black;
     font-family: keep_calm_medregular;
+    z-index: 1000;
 }
 
 a:hover {
     text-decoration: none;
-    color: rgb(92, 161, 98);
+    color: rgb(73, 167, 81);
+    transition: all 150ms cubic-bezier(.17,.67,.83,.67);
+    text-shadow: 0 0 4px rgb(196, 196, 196);
+    
 }
 
 
@@ -135,11 +173,17 @@ a:hover {
 
 #nav {
   padding: 30px;
-  background-image: url(../src/assets/background.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  background: rgb(56,235,186);
+  background: linear-gradient(-130deg, rgba(56,235,186,1) 0%, rgba(111,177,210,1) 92%);
+  background-position: bottom;
+  background-repeat: repeat;
+  background-size: fill;
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
 
 }
 

@@ -9,28 +9,32 @@
         <meta charset="utf-8">
         <title>Font Test</title>
     </head>
+
+    <div id="box1">
+
     <body>
-        <p class="white_header">Questions or comments?</p>
-        <p class="paragraph">Fill in the form below with your name,
+        <h2 class="white_header">Questions or comments?</h2>
+        <h3 class="paragraph">Fill in the form below with your name,
             your email, and a message to our devs on how we can help
             you or improve our service!
-        </p>
-
+        </h3>
+<div id="box2">
 <form action="https://formsubmit.co/comstockcolin@gmail.com" method="POST">
      <input type="hidden" name="_subject" value="Doubleclick User Comment">
-     <label for="name"><b>Name</b></label><br>
+     <br><label for="name"><b>Name</b></label><br>
      <input type="text" name="name" placeholder="Write your name in here!" required>
      <br>
      <br><label for="name"><b>Email</b></label><br>
      <input type="email" name="email" placeholder="Write your email in here!" required>
      <br>
      <br><label for="name"><b>Message</b></label><br>
-     <input type="text" name="message" placeholder="Write your message here!" required>
+     <textarea type="text" name="message" placeholder="Write your message here!" required></textarea>
      <br><br>
      <button class="button" type="submit"><img src="../assets/gradient_buttons/Submit.png" width="138" height="38" color="transparent" alt="Create Account"></button>
      <br><br>
      <input type="hidden" name="_next" value="http://localhost:3000/thanks">
 </form>
+</div>
 
         
 
@@ -56,9 +60,15 @@ Name:<br>
 Message:<br> <textarea name="ContactCommentt" rows="6" cols="20">
 
 
-</textarea><br><br> <input type="submit" value="Submit"> </form>-->
+</textarea>
+
+<br><br> 
+
+<input type="submit" value="Submit"> </form>-->
     </body>
+    </div>
 </html>
+
 
 
 </template>

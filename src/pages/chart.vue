@@ -40,12 +40,7 @@
                 <div class="row mt-5" v-if="arrClose.length > 0">
                     <div class="col">
                         <h2 class="text-center">AAPL Chart Graph</h2>
-                        <LineChart
-                            :chartData="arrClose"
-                            :options="chartOptions"
-                            :chartColors="closeChartColors"
-                            label="Prices"
-                        />
+                        
                     </div>
                 </div>
             </div>
@@ -65,7 +60,6 @@
 
 <script>
 import BarChart from '/src/components/barChart.vue';
-import LineChart from '/src/components/LineChart.vue';
 
 import axios from 'axios';
 import moment from 'moment';
@@ -74,7 +68,6 @@ export default {
     name: "chart",
     components: {
         BarChart,
-        LineChart
     },
     data(){
         return{
