@@ -86,6 +86,9 @@
                 alt="Performance-Backdrop"
                 style="width:57%;"
                 >
+                <div class="schart">
+                    <stockChart />
+                </div>
             </div>
 
             <div id="discard-container">
@@ -112,7 +115,7 @@
             </div>
 
             <div id="place-trade-button">
-                <button type="button" class="button" v-on:click.native="placeTrade()">
+                <button type="button" class="button" v-on:click="placeTrade()">
                 <img src="../assets/gradient_buttons/place_trade_button.png"
                 alt="NewTrade-button"
                 style="width:70%;"
@@ -155,9 +158,13 @@
 
 <script>
 import {getAuth} from "firebase/auth";
+import stockChart from '/src/components/stockChart.vue'
+
 
 export default {
     name: "trade",
+    components: {stockChart},
+    
     data()
     {
         return {
@@ -522,6 +529,8 @@ export default {
 /* Container holding Stock Performance Chart */
 #performance-container {
     position: relative;
+    width: 100%;
+    height: 100%;
     top: 45px;
     left: -10px;
     margin: 0 auto;
@@ -570,6 +579,13 @@ export default {
     outline: none;
     padding: 0;
     background: none;
+}
+
+.schart {
+    position: absolute;
+    top: 57%;
+    left: 28%;
+    transform: translate(-50%, -50%);
 }
 /* Centered text */
 .centered {
