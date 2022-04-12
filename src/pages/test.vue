@@ -91,6 +91,21 @@
 
     <p class="paragraph">Your Current Postitions are</p>
 
+
+
+
+
+
+<div>
+        <h1>Delete Page</h1>
+        <button class="delete-btn" @click="doDelete">Delete Page</button>
+        <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
+    </div>
+
+
+
+
+
 </div>
 
 <div v-else-if="loggedin===false">
@@ -102,13 +117,18 @@
 
 
 </div>
+
+
+
 </template>
 
 
 <script>
 import {getAuth} from "firebase/auth";
+import ConfirmDialogue from '../components/ConfirmDialogue.vue'
 export default {
     name: "test",
+    components: { ConfirmDialogue },
     beforeCreate()
     {
         //Vue.LoadScript("https://cdn.jsdelivr.net/npm/chart.js")

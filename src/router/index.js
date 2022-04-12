@@ -12,6 +12,7 @@ import Contact from '/src/pages/contact.vue'
 import Thanks from '/src/pages/thanks.vue'
 import Chart from '/src/pages/chart.vue'
 import Position from '/src/pages/position.vue'
+import TradeHistory from '/src/pages/history.vue'
 import swal from 'sweetalert'
 //import firebase from 'firebase'
 //import { auth } from '../firebase'
@@ -96,6 +97,12 @@ const routes = [
         name: 'position',
         component: Position
     },
+
+    {
+        path: '/history',
+        name: 'history',
+        component: TradeHistory
+    }
 
    
 ]

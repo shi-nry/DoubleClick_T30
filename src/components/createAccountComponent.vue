@@ -31,7 +31,7 @@
         -->
         <!-- Nick Rinehart-->
         
-
+        <div id="box2">
         <form class="register" @submit.prevent="register">
             <h2>Register</h2>
             <input 
@@ -48,13 +48,15 @@
             <br><br>
             
         </form>
+        </div>
+        <br>
 
     </div>
 
 
 </template>
 
-//<script>
+<script>
 //export default {};
 import { ref } from 'vue'
 import { useStore } from 'vuex'
@@ -77,11 +79,15 @@ export default {
 
 		return {
 			register_form,
-			//register
+			register
 		}
 	}
 }
 </script>
+
+<style scoped>
+    @import '/src/pages/keepcalmfont.css';
+</style>
 
 
 

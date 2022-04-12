@@ -40,7 +40,7 @@
          </div>
 
 
-        <br><br><br><br>
+        <br><br>
 
          <h2 class="paragraph">Are dividends important to you?</h2>
 
@@ -64,7 +64,7 @@
              
         </div>
 
-    <br><br><br><br>
+    <br><br>
 
 
 <h2 class="paragraph">What's your preferred hold time for a position?</h2>
@@ -98,7 +98,7 @@
     <div v-else-if="loggedin===false">
         <div>
             <h2> Please log in to view this page! </h2>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            
         </div>
     </div>
 </div>
@@ -171,7 +171,7 @@ export default{
                 if(data[key].userId === this.userid){
                     this.userPostId = data[key].id
     
-                    this.cashMoney = data[key].cashMoney
+                    //this.cashMoney = data[key].cashMoney
 
                     if(data[key].dividendImportance && data[key].holdTime && data[key].riskTolerance){
                         this.dividendImportance = data[key].dividendImportance

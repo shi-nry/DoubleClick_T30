@@ -23,6 +23,11 @@ module.exports = {
   //window.onload = function() {
   //created();
 //};
+//test
+//test
+
+
+//test
 export default {
   name: 'App',
   data(){
@@ -71,23 +76,22 @@ export default {
         <!--<img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>-->
         <p class="navbar" style="padding-right: 20px;" align="right">
         <router-link to="/"> home &ensp;</router-link>
-        <router-link to="/login"> {{loggedin}} &ensp;</router-link> <!-- make login a variable --> 
+        <router-link to="/login"> account &ensp;</router-link> <!-- make login a variable --> 
         <!--<router-link to="/settings">settings &ensp;</router-link>-->
-        <router-link to="/contact">contact &ensp;</router-link>
         <router-link to="/preference"> preferences &ensp;</router-link>
         <router-link to="/position"> positions &ensp;</router-link>
         <router-link to="/trade"> trade &ensp;</router-link>
-        <router-link to="/test2">stock suggestion &ensp;</router-link>
-        <router-link to="/test">test</router-link>
-        </p>
-        <!--
-        <img src="../src/assets/top_navigation/logo.png" align="left" alt="logo" width="227" height="27"/>
+        <router-link to="/history"> performance &ensp;</router-link>
+        <router-link to="/contact">contact &ensp;</router-link>
+        <!--<router-link to="/test2">stock suggestion &ensp;</router-link>
+        <router-link to="/test">test</router-link>-->
+              
         <router-link to="/settings"><p class="navbar" style="padding-right: 40px;" align="right">settings</p></router-link>
         <router-link to="/"><p class="navbar" style="padding-right: 15px;" align="right" alt="logo">home</p></router-link>
         <router-link to="/test"><img src="../src/assets/top_navigation/test.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="35" height="15"/></router-link>
         <router-link to="/login"><img src="../src/assets/top_navigation/login.png" style="padding-right: 15px;" align="right" width="42" height="20" alt="logo"/></router-link>
         <router-link to="/preference"><img src="../src/assets/top_navigation/account.png" style="padding-right: 15px; padding-top: 1px;" align="right" alt="logo" width="70" height="15"/></router-link>
-        -->
+        </p>
       </li>
     </div>
     

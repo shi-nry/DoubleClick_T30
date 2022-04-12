@@ -25,13 +25,13 @@
             <br> 
             
             
-            <input type="image" img src="../src/assets/gradient_buttons/Login.png" width="136" height="38" color="transparent" alt="Login"/> <br>
+            <button class="button" type="submit"><img src="../assets/gradient_buttons/login_btn.png" width="138" height="38" color="transparent" alt="Create Account"></button>
         </form>
      -->
 
 
      
-
+    <div id="box2">
      <form class="login" @submit.prevent="login">
         <h2>Login</h2>
         <input 
@@ -44,8 +44,11 @@
             placeholder="Password" 
             v-model="login_form.password" />
         <br><br>
-        <button class="button" value="login"><img src="../assets/gradient_buttons/Login.png" width="138" height="38" color="transparent" alt="Create Account"></button>
+        <button class="button" type="submit"><img src="../assets/gradient_buttons/Login.png" width="138" height="38" border="0" color="transparent" alt="Create Account"></button>
+        <br><br>
     </form>
+    </div>
+    
     <br>
 
 
@@ -58,9 +61,7 @@
 </template>
 
 <style scoped>
-#div{
-    font-family: lt_amberregular;
-}
+@import '/src/pages/keepcalmfont.css';
 </style>
 
 <script>

@@ -5,6 +5,13 @@
 
 <template>
 
+<div>
+
+<form class="logout" @submit.prevent="logout">
+				<!--<h2>Log Out</h2>-->
+				<button class="button_out" value="logout"><img src="../assets/gradient_buttons/logout.png"  color="transparent" alt="Log Out"></button>
+			</form>
+
 <div id="box1">
 
     <main class="login">
@@ -34,6 +41,7 @@
 				<br><br>
 				<button class="button" value="login"><img src="../assets/gradient_buttons/Login.png" width="138" height="38" color="transparent" alt="Create Account"></button>
 			</form>
+			
 			<br>
 			</div>
 
@@ -65,10 +73,7 @@
 		
 	 </div> 
 	old non dynamic method end-->
-			<form class="logout" @submit.prevent="logout">
-				<!--<h2>Log Out</h2>-->
-				<button class="button_out" value="logout"><img src="../assets/gradient_buttons/log_out_red.png" width="138" height="38" color="transparent" alt="Log Out"></button>
-			</form>
+			
 			<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 
 			<!--<form class="deletes" @submit.prevent="deletes">
@@ -93,16 +98,19 @@
 
 	<div v-if="flag===false">
 		<br><img src="../assets/login/dont_have.png" width="486" height="43" color="transparent" alt="Create Account"><br><br>
-		<button v-on:click="flag = true; toggle();"><img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="136" height="38" color="transparent" alt="Create Account"></button>
+		<button class="button" v-on:click="flag = true; toggle();"><img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="136" height="38" color="transparent" alt="Create Account"></button>
 	</div>
+
+
 
 </div> 
         
 
-	
+</div>
 
 <!-- end new dynamic register-->
-</div> 
+</div>
+
 </template>
 
 <script>
@@ -126,7 +134,7 @@ export default {
   },
   data (){
       return {
-          component: "loginAccountComponent"
+          component: "loginAccountComponent",
       }
   },
   methods: {
@@ -168,6 +176,7 @@ export default {
 			const auth = getAuth();
 			console.log("signed out");
 			signOut(auth).then(() => {}).catch((error) => {});
+			swal('Logged Out Successfully!')
 		}
 
 		const deletes = () => {

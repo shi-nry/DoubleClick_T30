@@ -1,59 +1,67 @@
+<style scoped>
+@import '/src/pages/keepcalmfont.css';
+</style>
+
 <template>
 <!-- This code will begin by printing out all available preferences. Then a text box and button will be created for submissions. (nicholas rinehart) -->
-<div>
-
+<div id="box1">
+    
     <div  v-if="loggedin===true">
       
 
-        <h1>Current open positions</h1>
-        <h2>Cash Balance</h2>
+        <h1 class="white_header">Current open positions</h1>
+        <div id="box3" class="paragraph">
+        <b class="paragraph">Cash Balance</b>
         ${{cashMoney}}
+        </div>
 
         <br><br><br>
-
-        <div v-for="position in this.positionsArray" :key="position.ticker" v-bind:id="position.id">
+        <div  v-for="position in this.positionsArray" :key="position.ticker">
+        <div id="box4">
             <div>
     
                 <div>
-                    Id : {{position.id}} 
+                    <h2 class="position_text_title">Trade Id : {{position.id}}</h2> 
                 </div>
 
                 <div>
-                    Ticker Name : {{position.ticker}}
+                    <h2 class="position_text">Ticker Name : {{position.ticker}}</h2>
                 </div>
 
                 <div>
-                    Buy in Price : {{position.tradePrice}}
+                    <h2 class="position_text">Buy in Price : {{position.tradePrice}}</h2>
                 </div>
 
                 <div>
-                    Number of Shares : {{position.shares}}
+                    <h2 class="position_text">Number of Shares : {{position.shares}}</h2>
                 </div>
 
                 <div>
-                    Current Price : {{position.currentPrice}}
+                    <h2 class="position_text">Current Price : {{position.currentPrice}}</h2>
                 </div>
 
                 <div>
-                    Current Profit/Loss : {{position.positionPL}}
+                    <h2 class="position_text">Current Profit/Loss : {{position.positionPL}}</h2>
                 </div>
 
-                <button type="button" class="button" v-bind:id="position.id" v-on:click="closePosition(position.id)"> Close Position </button>
+                <button type="button" class="button" v-bind:id="position.id" v-on:click="closePosition(position.id)"><img src="../assets/gradient_buttons/close_pos.png" width="138" height="38" border="0" color="transparent" alt="Create Account"></button>
 
-                <br><br><br>
+                <br>
             </div>
+        </div>
+        <br>
         </div>
     </div>
     
 
     <div v-else-if="loggedin===false">
-        <div>
+        <div >
             <h2> Please log in to view this page! </h2>
 
         </div>
     </div>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
 
 </div>
  
@@ -102,8 +110,10 @@ export default{
 
     },
     async beforeMount(){
-        await this.getCashBalance();
-        await this.getPositions();
+        if(this.loggedin == true){
+            await this.getCashBalance();
+            await this.getPositions();
+        }
     },
     methods: { 
         
@@ -123,13 +133,10 @@ export default{
                 }
             }
 
-            console.log(this.positionsArray[targetIndex])
-            console.log(this.positionsArray[targetIndex].positionPL)
-
-            console.log(this.userPostId)
-
+            console.log(this.positionsArray[targetIndex].tradePrice)
             console.log(this.cashMoney + ' ' + this.positionsArray[targetIndex].positionPL)
-            this.cashMoney += parseFloat(this.positionsArray[targetIndex].positionPL)
+            this.cashMoney += (parseFloat(this.positionsArray[targetIndex].positionPL) + 
+                (parseFloat(this.positionsArray[targetIndex].tradePrice) * parseFloat(this.positionsArray[targetIndex].shares)))
             console.log( 'cash balance after close ' + this.cashMoney)
 
             
@@ -156,8 +163,8 @@ export default{
             url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/User/' + this.userPostId + '.json'
             headers = {}
 
-
-            
+            console.log(this.finalProfit)
+            console.log(this.cashMoney)
             body = {
                 cashMoney: this.cashMoney,
                 
@@ -207,9 +214,12 @@ export default{
                         positionsArray.push(data[key])
                         this.stockTicker = data[key].ticker
 
-                        await this.getCurrentPrice()
-                        data[key].currentPrice = this.currentPrice
-
+                        try{
+                            await this.getCurrentPrice()
+                            data[key].currentPrice = this.currentPrice
+                        }catch{
+                            console.log('could not get current price for ' + this.stockTicker)
+                        }
                         console.log('trade price ' + data[key].tradePrice)
                         console.log('current price ' + this.currentPrice)
 
@@ -275,9 +285,3 @@ export default{
 }
 </script>
 
-<style scoped>
-
-
-
-
-</style>

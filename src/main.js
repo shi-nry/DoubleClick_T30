@@ -3,13 +3,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import stockChart from './components/stockChart.vue'
-import VueTradingView from 'vue-trading-view'
 import LoadScript from "vue-plugin-load-script"
+import VueTradingView from 'vue-trading-view'
+import VuejsDialog from 'vuejs-dialog';
+import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
 import {initializeApp} from 'firebase/app'
 import { createChart } from 'lightweight-charts'
-
 //firebase.initializeApp(config);
 
 

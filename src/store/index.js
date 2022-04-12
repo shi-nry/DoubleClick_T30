@@ -51,6 +51,7 @@ export default createStore({
       commit('SET_USER', auth.currentUser)
       console.log(auth.currentUser)
       router.push('/')
+      swal('Logged in Successfully!')
     },
 
     async register ({ commit}, details) {

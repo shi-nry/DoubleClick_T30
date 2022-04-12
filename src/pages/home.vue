@@ -41,6 +41,7 @@ if (user) {
 <html>
 <body>
 
+
 <div id="box1">
 
 
@@ -60,10 +61,14 @@ if (user) {
   <img src="../assets/main_screen/welcome_desc.png" width="573" height="150" color="transparent" alt="Create Account">
   -->
   <br>
+  <div id="box4">
   <h3 class="paragraph">Get started here:</h3>
   <button class="button" @click="$router.push('login')">
     <img src="../assets/gradient_buttons/create_act_btn_fixed.png" width="138" height="38" color="transparent" alt="Create Account">
   </button>
+  <br>
+  <br>
+  </div>
   <br>
   <br>
   <br>

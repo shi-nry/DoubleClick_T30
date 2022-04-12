@@ -1,59 +1,77 @@
+<style scoped>
+    @import 'keepcalmfont.css';
+</style>
+
 <!-- This file hosts the trade page of the web application -->
 <!-- Still needs to display chart -->
 <!-- This file was worked on by Henry Shi -->
 
 <template>
 <main>
-<div>
+<div id="box8">
      <div id="wrapper" v-if="loggedin===true && hasPreferences===true">
+        
             <!--div id="trade">
                 <span style="font-size: 50px; color: #099ba3;">Trade</span>
                 <span style="font-size: 30px;"> SPY</span>
             </div-->
+            
+            <div id="trade-text">
+                <h1>
+                    <span>Trade </span>
+                    <span style="font-size: 50px; color: #099ba3"> {{stockTicker.toUpperCase()}}</span>
+                </h1>
+                
+            </div>
 
             <div id="trade-function">
-                <h1>
-                    <span style="font-size: 50px; color: #099ba3;">Trade</span>
+                
+                <div id="box6" class="position_text">
+                <h2 class="position_text">Available funds: ${{this.cashMoney.toFixed(2)}}</h2>
+                </div>
 
-                    {{stockTicker.toUpperCase()}}
-                </h1>
                 <form @submit.prevent="updateInfo">
                     <input type="text" v-model="stockTicker" name="stock" placeholder="Enter Ticker">
-                    <input type="submit" value="Search Ticker">
+                    <input type="submit" value="Search Ticker" >
                 </form>
-                <div>
+                
+                <!--div>
                     <br>
-                    <input type="submit" value="suggestStock" v-on:click="suggestStock()">
+                    <button class="button">
+                        <img src="../assets/gradient_buttons/suggest_stock.png"
+                        alt="suggestStock" v-on:click="suggestStock()" style="width:200px" />
+                    </button>
                     <br><br>
                     <input type="number" v-model="shares" name="shares" placeholder="Enter Desired Shares" min="1">
-                </div>
+                </div-->
                 <div>
-                    <br>
-                    Available funds: ${{this.cashMoney}}
                 </div>
+
+                <div id="share-box">
+                        <input type="number" v-model="shares" name="shares" placeholder="Enter Desired Shares" min="1">
+                </div>
+
 
                 <div v-if="tickerSuggestion">
-
-                    <p class="white_subheader">Your recommended trade is {{tickerSuggestion}}</p>
-
-
-                    <p class="white_subheader">The 52 week high for {{tickerSuggestion}} is {{yearHigh}}
-                        and the 52 week low is {{yearLow}} </p>
+                    
+                    <div id="box7">
+                    <h2 class="suggestion_text">Your recommended trade is {{tickerSuggestion}}</h2>
 
 
+                    <h2 class="suggestion_text">The 52 week high for {{tickerSuggestion}} is {{yearHigh}}
+                        and the 52 week low is {{yearLow}} </h2>
+
+                    
                     <div v-if="companyCategory">
                         
-                        <p class="paragraph">{{homepageURL}}</p>
+                        <p class="suggestion_text">{{homepageURL}}</p>
                         <br><br>
 
-                        <p class="white_subheader">Company Category:</p>
+                        <p class="suggestion_text">Company Category:</p>
                         
-                        <p class="paragraph">{{companyCategory}}</p>
-
-                        
+                        <p class="suggestion_text">{{companyCategory}}</p>
                     </div>
-
-                    <br><br><br>
+                    </div>    
 
                 </div>
             <!--
@@ -77,7 +95,7 @@
                 alt="About-Stock-Backdrop"
                 style="width:57%;"
                 >
-                <div class="centered"> {{companyDescription}}</div>
+                <div class="description"> {{companyDescription}}</div>
                 <!--div class="centered">Will pull stock info to go here</div-->
             </div>
 
@@ -86,39 +104,49 @@
                 alt="Performance-Backdrop"
                 style="width:57%;"
                 >
-                <div class="schart">
-                    <stockChart />
+                <div class="schart" :key="chartKey">
+                    <VueTradingView :options="{
+                        symbol: exchangeTicker,
+                        width: '650',
+                        height: '190',
+                        theme: 'light',
+                        interval: '60',
+                        timezone: 'America/Los_Angeles',
+                        save_image: 'false',
+                        style: '2',
+                        hide_legend: 'true',
+                    }" />
                 </div>
             </div>
 
-            <div id="discard-container">
-                <img src="../assets/main_screen/discard pile base.png"
-                alt="Discard-Box"
-                style="width:15%;"
+            <!--div id="card1-container">
+                <img src="../assets/tradeAssets/suggest_card.png"
+                    style="width:16%;"
                 >
             </div>
 
-            <div id="card-container">
-                <img src="../assets/main_screen/discard pile base.png"
-                alt="Card-Box"
+            <div id="card2-container">
+                <img src="../assets/tradeAssets/lohi_card.png"
+                alt="card2"
                 style="width:15%;"
                 >
-            </div>
+            </div-->
 
             <div id="new-trade-button">
-                <button type="button" class="button" v-on:click="getCurrentPrice()">
+                <button class="button" v-on:click="suggestStock()">
                     <img src="../assets/gradient_buttons/new_trade_button.png"
-                    alt="NewTrade-button"
-                    style="width:70%;"
+                    alt="NewTrade-button" 
+                    style="width:250px;"
                     >
                 </button>
             </div>
 
             <div id="place-trade-button">
-                <button type="button" class="button" v-on:click="placeTrade()">
+                <button class="button" v-on:click="placeTrade()">
                 <img src="../assets/gradient_buttons/place_trade_button.png"
                 alt="NewTrade-button"
-                style="width:70%;"
+                style="width:250px;"
+                
                 ></button>
 
             </div>
@@ -128,7 +156,7 @@
                 alt="Trade-Info"
                 style="width:40%;"
                 >
-                <div class="price-text"> ${{currentPrice.toLocaleString('en', {useGrouping:true})}}</div>
+                <div class="price-text"> {{displayPrice.toLocaleString('en', {useGrouping:true})}}</div>
                 <div class="volume-text"> {{dayVolume.toLocaleString('en', {useGrouping:true})}}</div>
                 <div class="marketcap-text"> {{marketCap.toLocaleString('en', {useGrouping:true})}}</div>
             </div>
@@ -137,21 +165,19 @@
     </div>
 
     <div v-else-if="loggedin===false">
-        <div>
+        <div id="box1">
             <h2> Please log in to view this page! </h2>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
 
     </div>
 
     <div v-else-if="loggedin===true && hasPreferences===false"> 
-        <div>
+        <div id="box1">
             <h2> Please navigate to preferences and set up your account! </h2>
         </div>
 
     </div>
 </div>
-
 
 </main>        
 </template>
@@ -159,23 +185,40 @@
 <script>
 import {getAuth} from "firebase/auth";
 import stockChart from '/src/components/stockChart.vue'
+import VueTradingView from 'vue-trading-view/src/vue-trading-view.vue';
 
 
 export default {
     name: "trade",
-    components: {stockChart},
+    components: {VueTradingView},
     
     data()
     {
         return {
+            /**cards
+            cards : [
+                {
+                url : "../assets/main_screen/discard pile base.png",
+                name: "card1"
+                }
+            ],**/
+
+            //card1: "../assets/main_screen/discard pile base.png",
+
             //single variables
             stockTicker: '',
             currentPrice: '',
+            displayPrice: '',
             dayVolume: '',
             loggedin: '',
             userId: '',
             shares: '',
             hasPreferences: '',
+            exchangeString: '',
+
+            //chart vars
+            exchangeTicker: '',
+            chartKey: 0,
 
             riskLevel: '',
             tickerSuggestion: '',
@@ -207,9 +250,6 @@ export default {
             holdTime: '',
             riskTolerance: '',
             
-
-
-
             //single polygon api vars
             companyDescription: '',
             companyCategory: '',
@@ -243,6 +283,9 @@ export default {
 
         this.getStockSuggestions();
         this.suggestionCounter = 0;
+        //this.card1 = "../assets/main_screen/discard pile base.png"
+        this.exchangeTicker = 'poopoo';
+        this.chartKey += 1;
     },
 
     methods:{
@@ -312,18 +355,19 @@ export default {
                 if(isVariable == risk){
                     matchesRiskTolerance = true
                 }
-                if(longTermGain > 20 && this.holdTime == 'long'){
+                if(longTermGain > 40 && this.holdTime == 'long'){
                     matchesHoldTime = true
                 }
                 if(shortTermGain > 10 && this.holdTime == 'short'){
                     matchesHoldTime = true
                 }
 
+                /*
                 console.log(ticker)
                 console.log(matchesHoldTime)
                 console.log(matchesDividendPreference)
                 console.log(matchesRiskTolerance)
-
+                */
                 if(matchesRiskTolerance && matchesDividendPreference && matchesHoldTime){
                     this.tickerSuggestionArray.push(ticker)
                 }
@@ -379,7 +423,12 @@ export default {
             console.log(this.cashMoney)
             console.log(parseFloat(this.cashMoney))
             console.log(parseFloat(totalTradeCost) > parseFloat(this.cashMoney))
-            if(parseFloat(totalTradeCost) < parseFloat(this.cashMoney)){
+            console.log(this.shares)
+            if(!this.stockTicker){
+                swal('Please Enter a Valid Stock Ticker!')
+                return
+            }
+            if(parseFloat(totalTradeCost) < parseFloat(this.cashMoney) && this.shares > 0){
                 
                 //first post position to DB
                 var url = 'https://doubleclick-461f4-default-rtdb.firebaseio.com/Position.json'
@@ -425,8 +474,10 @@ export default {
                 console.log(data)
 
                 swal('Trade Placed Successfully!')
-            } else {
+            } else if(parseFloat(totalTradeCost) > parseFloat(this.cashMoney)) {
                 swal('Sorry, You Don\'t Have Enough Funds to Place This Trade!')
+            } else {
+                swal('Please Enter a Valid Amount of Shares to Purchase')
             }
 
         },
@@ -471,6 +522,16 @@ export default {
             this.peRatio = data[this.stockTicker.toUpperCase()].peRatio
             this.volatility = data[this.stockTicker.toUpperCase()].volatility
             this.description = data[this.stockTicker.toUpperCase()].description
+            this.exchangeString = data[this.stockTicker.toUpperCase()].exchangeName
+            this.displayPrice = '$' + data[this.stockTicker.toUpperCase()].askPrice
+
+            if (this.exchangeString == 'NYSE') {
+                this.exchangeTicker = 'NYSE:' + this.stockTicker;
+            }
+            else if (this.exchangeString == 'NASD') {
+                this.exchangeTicker = 'NASDAQ:' + this.stockTicker;
+            }
+            this.chartKey += 1;
 
             this.getStockInfo()
 
@@ -502,12 +563,47 @@ export default {
             this.marketCap = data.results.market_cap
 
         },
+
+        //update cards
+        updateCards: function (){
+            document.getElementById('card1').src="../assets/tradeAssets/suggest_card.png";
+            document.getElementById('card2').src="../assets/tradeAssets/lohi_card.png";
+        },
     }
+
 }
 
 </script>
 
 <style scoped>
+/*@import 'keepcalmfont.css';*/
+
+form input[type=submit] {
+    background: url("../assets/gradient_buttons/search.png") 
+        no-repeat center center;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    z-index: 100;
+      color: transparent;
+}
+
+#trade-text {
+    position: relative;
+    top: 50px;
+    margin: 0 auto;
+    font-size: 30px;
+    padding: none;
+}
+
+#share-box {
+    position: relative;
+    top: 11px;
+    left: 350px;
+    margin: auto;
+}
+
 #trade-function {
     text-align: center;
 }
@@ -538,70 +634,83 @@ export default {
     color: teal
 }
 /* Container holding Discard Box */
-#discard-container {
+#card1-container {
     position: relative;
     top: -515px;
     left: 220px;
     margin: 0 auto;
 }
 /* Container holding Stock Card Box */
-#card-container {
+#card2-container {
     position: relative;
-    top: -747px;
+    top: -744px;
     left: 443px;
     margin: 0 auto;
 }
 /* Container holding New Trade Button */
 #new-trade-button {
     position: relative;
-    top: -747px;
-    left: 220px;
-    margin: 0 auto;
+    width: 250px;
+    height: 100px;
+    top: -275px;
+    left: 205px;
+    margin: auto;
+    
 }
 /* Container holding Place Trade Button */
 #place-trade-button {
     position: relative;
-    top: -847px;
-    left: 443px;
-    margin: 0 auto;
+    width: 250px;
+    height: 100px;
+    top: -375px;
+    left: 435px;
+    margin: auto;
 }
 /* Container holding Trade Info Box */
 #trade-info-container {
     position: relative;
-    top: -837px;
+    top: -360px;
     left: 350px;
     margin: 0 auto;
     color: teal
 }
+
 /* Button class */
 .button {
+    width: 200px;
+    height: 100px;
     border: none;
+    background-color: transparent;
+    /*background-size: 100%;*/
     outline: none;
-    padding: 0;
-    background: none;
+    cursor: pointer;
+    padding: none;
+    z-index: 100;
+        color: transparent;
 }
 
 .schart {
     position: absolute;
-    top: 57%;
-    left: 28%;
+    top: 58%;
+    left: 28.5%;
     transform: translate(-50%, -50%);
 }
 /* Centered text */
-.centered {
+.description {
+    font-size: 18px;
     position: absolute;
     top: 55%;
-    left: 27%;
+    left: 28%;
     transform: translate(-50%, -50%);
-    inline-size: 550px;
+    inline-size: 620px;
     overflow-wrap: break-word;
 }
 
 .price-text {
     font-size: 30px;
     position: absolute;
-    top: 35%;
-    left: 56%;
+    top: 37%;
+    left: 57%;
     transform: translate(-50%, -50%);
     inline-size: 500px;
     overflow-wrap: break-word;
@@ -610,7 +719,7 @@ export default {
 .volume-text {
     font-size: 30px;
     position: absolute;
-    top: 53%;
+    top: 54%;
     left: 52%;
     transform: translate(-50%, -50%);
     inline-size: 500px;
@@ -620,7 +729,7 @@ export default {
 .marketcap-text {
     font-size: 30px;
     position: absolute;
-    top: 70%;
+    top: 72%;
     left: 55%;
     transform: translate(-50%, -50%);
     inline-size: 500px;
