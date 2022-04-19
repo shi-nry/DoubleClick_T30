@@ -12,7 +12,7 @@
         <h1 class="white_header">Current open positions</h1>
         <div id="box3" class="paragraph">
         <b class="paragraph">Cash Balance</b>
-        ${{cashMoney}}
+        ${{cashMoney.toFixed(2)}}
         </div>
 
         <br><br><br>

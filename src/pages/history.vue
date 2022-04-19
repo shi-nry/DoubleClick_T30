@@ -13,7 +13,7 @@
 
         <div id="box3" class="paragraph">
             <b class="paragraph">Cash Balance</b>
-            ${{this.cashMoney.toFixed(2)}}
+            ${{cashMoney.toFixed(2)}}
         </div>
         <br>
         <div id="box5">
