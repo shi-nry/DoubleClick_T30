@@ -83,8 +83,9 @@ export default {
         <router-link to="/trade"> trade &ensp;</router-link>
         <router-link to="/history"> performance &ensp;</router-link>
         <router-link to="/contact">contact &ensp;</router-link>
-        <!--<router-link to="/test2">stock suggestion &ensp;</router-link>
-        <router-link to="/test">test</router-link>-->
+        <!--<router-link to="/test2">stock suggestion &ensp;</router-link>-->
+        <!--<router-link to="/test">test</router-link>
+        <router-link to="/trade_redesign">trade_new</router-link>-->
               
         <router-link to="/settings"><p class="navbar" style="padding-right: 40px;" align="right">settings</p></router-link>
         <router-link to="/"><p class="navbar" style="padding-right: 15px;" align="right" alt="logo">home</p></router-link>

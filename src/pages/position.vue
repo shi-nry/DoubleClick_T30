@@ -44,7 +44,7 @@
                     <h2 class="position_text">Current Profit/Loss : {{position.positionPL}}</h2>
                 </div>
 
-                <button type="button" class="button" v-bind:id="position.id" v-on:click="closePosition(position.id)"><img src="../assets/gradient_buttons/close_pos.png" width="138" height="38" border="0" color="transparent" alt="Create Account"></button>
+                <button type="button" class="button" v-bind:id="position.id" v-on:click="swalDecision(position.id)"><img src="../assets/gradient_buttons/close_pos.png" width="138" height="38" border="0" color="transparent" alt="Create Account"></button>
 
                 <br>
             </div>
@@ -116,6 +116,24 @@ export default{
         }
     },
     methods: { 
+        async swalDecision(buttonId){
+            swal("Are you sure you want to close this position?", {
+              dangermode: true,
+              buttons: {
+                no: "No",
+                yes: "Yes"
+              }
+            })
+            .then((value) => {
+              if(value == 'yes'){
+                console.log('hell fuckin yea')
+                this.closePosition(buttonId)
+              }
+              if(value == 'no'){
+                console.log('aw hell naw')
+              }
+            })
+        },
         
         async closePosition(buttonId){
 
@@ -132,7 +150,7 @@ export default{
                     break
                 }
             }
-
+            console.log(this.positionsArray[targetIndex])
             console.log(this.positionsArray[targetIndex].tradePrice)
             console.log(this.cashMoney + ' ' + this.positionsArray[targetIndex].positionPL)
             this.cashMoney += (parseFloat(this.positionsArray[targetIndex].positionPL) + 

@@ -95,16 +95,11 @@
 
 
 
-
-<div>
-        <h1>Delete Page</h1>
-        <button class="delete-btn" @click="doDelete">Delete Page</button>
-        <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
+		<button v-on:click="testSwal()" Open Popup> </button>
+		<div>
+        {{swal}}
     </div>
-
-
-
-
+	
 
 </div>
 
@@ -126,6 +121,8 @@
 <script>
 import {getAuth} from "firebase/auth";
 import ConfirmDialogue from '../components/ConfirmDialogue.vue'
+import { ref } from 'vue';
+import Popup from '../components/Popup.vue';
 export default {
     name: "test",
     components: { ConfirmDialogue },
@@ -161,6 +158,8 @@ export default {
             cashbalance: '',
             accountquerytype: '',
 
+            swal: '',
+
             //maps
             //currentPositions: new map(),
 
@@ -188,6 +187,23 @@ export default {
     },
     */
     methods:{
+        async testSwal(){
+            swal("Are you sure?", {
+              buttons: {
+                no: "no",
+                yes: "yes"
+              }
+            })
+            .then((value) => {
+              if(value == 'yes'){
+                console.log('hell fuckin yea')
+              }
+              if(value == 'no'){
+                console.log('aw hell naw')
+              }
+            })
+        },
+
         async getCurrentPrice(){
             const apikey = "TILH8USQQOGPD8OQWLDV033FIOBDENMY"
             //need to build URL
