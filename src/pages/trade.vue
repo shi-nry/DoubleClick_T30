@@ -104,7 +104,7 @@
                 </div>
 
                 
-                <input class="searchbox" type="text" v-model="stockTicker" name="stock" placeholder="Enter Ticker">
+                <input class="searchbox" type="text" v-model="stockTicker" name="stock" placeholder="Enter Ticker (like AAPL or TSLA...)">
                 <button id="searchbox" class="button" v-on:click="updateInfo()" value="Search Ticker" > 
                     <img src="../assets/gradient_buttons/search.png"
                         alt="Search-Button"
@@ -455,13 +455,11 @@ export default {
                     matchesHoldTime = true
                 }
 
-                /*
-                console.log(ticker)
-                console.log(matchesHoldTime)
-                console.log(matchesDividendPreference)
-                console.log(matchesRiskTolerance)
-                */
+                
+                //console.log(ticker)
+                
                 if(matchesRiskTolerance && matchesDividendPreference && matchesHoldTime){
+                    console.log(ticker)
                     this.tickerSuggestionArray.push(ticker)
                 }
 
