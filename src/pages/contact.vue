@@ -19,7 +19,7 @@
             you or improve our service!
         </h3>
 <div id="box2">
-<form action="https://formsubmit.co/comstockcolin@gmail.com" method="POST">
+<form action="https://formsubmit.co/689c59da623cc4a4d7318702940c2782" method="POST">
      <input type="hidden" name="_subject" value="Doubleclick User Comment">
      <br><label for="name"><b>Name</b></label><br>
      <input type="text" name="name" placeholder="Write your name in here!" required>

@@ -580,6 +580,7 @@ export default {
             const apikey = "TILH8USQQOGPD8OQWLDV033FIOBDENMY"
             var url = "https://api.tdameritrade.com/v1/marketdata/"    
             console.log(this.stockTicker)
+            this.tickerSuggestion = this.stockTicker.toUpperCase()
 
             if(!this.stockTicker){
                 swal('You have run out of trade suggestions for your preferences!')
