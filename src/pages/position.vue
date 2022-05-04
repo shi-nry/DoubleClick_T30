@@ -13,6 +13,11 @@
         <div id="box3" class="paragraph">
         <b class="paragraph">Cash Balance</b>
         ${{cashMoney.toFixed(2)}}
+        <br>
+        <b class="paragraph">Net Liquidating Value</b>
+        ${{netLiquidatingValue.toFixed(2)}}
+        <br>
+        <button type="button" class="button" v-on:click="refresh()"><img src="../assets/gradient_buttons/refresh.png" width="138" height="38" border="0" color="transparent" alt="Refresh Positions"></button>
         </div>
 
         <br><br><br>
@@ -88,6 +93,7 @@ export default{
             positionsArray: [],
             positionKey: '',
 
+            netLiquidatingValue: '',
             
             
         }
@@ -116,6 +122,11 @@ export default{
         }
     },
     methods: { 
+        async refresh(){
+            await this.getCashBalance();
+            await this.getPositions();
+        },
+
         async swalDecision(buttonId){
             swal("Are you sure you want to close this position?", {
               dangermode: true,
@@ -153,8 +164,17 @@ export default{
             console.log(this.positionsArray[targetIndex])
             console.log(this.positionsArray[targetIndex].tradePrice)
             console.log(this.cashMoney + ' ' + this.positionsArray[targetIndex].positionPL)
+
+            //this.stockTicker = this.positionsArray[targetIndex].ticker
+            //this.getCurrentPrice()
+
+            //this.netLiquidatingValue = this.netLiquidatingValue + 
+            //    (parseFloat(this.positionsArray[targetIndex].shares) * this.currentPrice)
+
             this.cashMoney += (parseFloat(this.positionsArray[targetIndex].positionPL) + 
                 (parseFloat(this.positionsArray[targetIndex].tradePrice) * parseFloat(this.positionsArray[targetIndex].shares)))
+
+                
             console.log( 'cash balance after close ' + this.cashMoney)
 
             
@@ -209,7 +229,7 @@ export default{
             
             //remove position from array
             this.positionsArray.splice(targetIndex, 1)
-
+            this.refresh()
             
         },
 
@@ -223,6 +243,8 @@ export default{
                 var data = await response.json()
 
                 var positionsArray = [];
+
+                var sumOfPositionValues = 0;
 
                 for(let key in data){
                     data[key].id = key
@@ -245,10 +267,13 @@ export default{
                         profit *= data[key].shares
                         this.positionPL = profit.toFixed(2)
                         data[key].positionPL = this.positionPL
+
+                        sumOfPositionValues += (this.currentPrice * data[key].shares)
                     }
                 }
 
-                
+                sumOfPositionValues += this.cashMoney;
+                this.netLiquidatingValue = sumOfPositionValues;
                 this.positionsArray = positionsArray;
                 //console.log(this.positionsArray)
 
